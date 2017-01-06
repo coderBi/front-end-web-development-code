@@ -1,0 +1,25 @@
+<!-- css层叠性指的是多次进行样色的设置，最终标签的展示样式是最后一个设置的样式。 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css的层叠性</title>
+	<style>
+		.box {
+			background-color: red;
+			height: 200px;
+			width: 200px;
+		}
+		.wrap {
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<!-- 最终这个div会显示wrap类设置的颜色 -->
+	<div>
+		<div class="box wrap"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!-- 清除浮动的几种方法：
+1，隔离墙法：在浮动元素下面放一个空的div，清除这个空的div的浮动，然后在后面放其他的元素
+2，clearfix：父容器实现包裹的同时，清除前后的浮动 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>利用浮动实现布局2</title>
+	<style>
+		* {
+			padding: 0;
+			margin:0px;
+		}
+		.header, .aside, .main, .footer {
+			background-color: teal;
+			border: 1px solid yellowgreen;
+			margin-bottom: 10px;
+		}
+		.aside, .main {
+			height: 200px;
+		}
+
+		.header {
+			height:100px;
+		}
+		.footer {
+			height: 50px;
+			/*清除左右的浮动，如果左边或者右边有浮动就先下放*/
+			clear:  both;
+		}
+		.aside {
+			width: 200px;
+			float: left;
+		}
+		.main {
+			/*margin-left: 202px;*/
+			float: left;
+			width: 960px;
+		}
+		.div-child {
+			/*"bd+" + tab*/
+			border: 1px solid yellow;
+			background-color: silver;
+			margin-bottom: 10px;
+			height: 200px;
+			float: left;
+			width: 400px;
+		}
+		.clearfix {
+			/*实现包裹*/
+			display: table;
+		}
+		/*在父容器前后各添加一个（虚拟）墙*/
+		.clearfix:before, .clearfix:after {
+			content: "";
+			display: block;
+			clear: both;
+			height: 0;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header"></div>
+	<div class="aside"></div>
+	<div class="main"></div>
+	<!-- 可以添加一个空的div，并且清除它的浮动作为隔离墙放在这里 -->
+	<div style="clear:both"></div>
+	<div class="footer"></div>
+
+	<!-- clearfix例子 -->
+	<div class="div-frame clearfix">
+		<div class="div-child">child1</div>
+		<div class="div-child">child2</div>
+	</div>
+	<div class="footer"></div>
+	
+</body>
+</html>

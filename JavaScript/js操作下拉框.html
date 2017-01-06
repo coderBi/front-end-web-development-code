@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js操作下拉框</title>
+	<style type="text/css">
+		/*table td {
+			border: 1px solid silver;
+		}*/
+	</style>
+</head>
+<body>
+	<table>
+		<tbody>
+			<tr>
+				<td width="70">
+					<select name="first" id="first" size="10" multiple>
+						<option value="选项1">选项1</option>
+						<option value="选项1">选项2</option>
+						<option value="选项1">选项3</option>
+						<option value="选项1">选项4</option>
+						<option value="选项1">选项5</option>
+						<option value="选项1">选项6</option>
+						<option value="选项1">选项7</option>
+						<option value="选项1">选项8</option>
+					</select>
+				</td>
+				<td width="70" valign="middle">
+					<input type="button" name="add" id="add" value="- ->">
+					<input type="button" name="add_all" id="add_all" value="==>">
+					<input type="button" name="remove" id="remove" value="<- -">
+					<input type="button" name="remove_all" id="remove_all" value="<==">
+				</td>
+				<td width="70">
+					<select name="second" id="second" size="10" multiple>
+					</select>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script language="JavaScript">
+	window.onload=function(){
+		//左边移到右边的按钮实现
+		document.getElementById("add").onclick=function(){
+			//获取左边select中option
+			var firtSelect=document.getElementById("first");
+			var leftOptions=firtSelect.getElementsByTagName("option");
+			//获取右边的select
+			var rightSelect=document.getElementById("second");
+
+			//遍历左边的option，添加到右边
+			//for(var i=0;i<leftOptions.length;++i){。左边的数组在变动，所以leftOptions.length在改变。例如如果左边八个选中，在移动了4个之后，数组长度是4，而i这是变成了4，导致后面四个没有移动
+			var len=leftOptions.length;
+			for(var i=0;i<len;++i){
+				//select如果没有被选中的selectedIndex值为-1
+				if(firtSelect.selectedIndex == -1){
+					break;
+				} else {
+					//有选中的，把当前选中的添加到右边select
+					rightSelect.appendChild(leftOptions[firtSelect.selectedIndex]);
+				}	
+			}
+		}
+
+		//左边全部移动到右边
+		document.getElementById("add_all").onclick=function(){
+			//获取左边select中option
+			var firtSelect=document.getElementById("first");
+			var leftOptions=firtSelect.getElementsByTagName("option");
+			//获取右边的select
+			var rightSelect=document.getElementById("second");
+			//遍历，全部移动
+			while(leftOptions.length){
+				//一直移动第一个到长度为0
+				rightSelect.appendChild(leftOptions[0]);
+			}
+		}
+
+		//右边移到左边的按钮实现
+		document.getElementById("remove").onclick=function(){
+			//获取右边select
+			var rightSelect=document.getElementById("second");
+			//获取左边的select
+			var leftSelect=document.getElementById("first");
+
+			//遍历左边的option，添加到左边
+			var len=rightSelect.length;
+			for(var i=0;i<len;++i){
+				//select如果没有被选中的selectedIndex值为-1
+				if(rightSelect.selectedIndex == -1){
+					break;
+				} else {
+					//有选中的，把当前选中的添加到左边select
+					//这里直接用rightSelect[rightSelect.selectedIndex]
+					leftSelect.appendChild(rightSelect[rightSelect.selectedIndex]);
+				}	
+			}
+		}
+
+		//右边全部移动到左边
+		document.getElementById("remove_all").onclick=function(){
+			//获取右边select中option
+			var rightSelect=document.getElementById("second");
+			var Options=rightSelect.getElementsByTagName("option");
+			//获取右边的select
+			var leftSelect=document.getElementById("first");
+			//遍历，全部移动
+			while(Options.length){
+				//一直移动第一个到长度为0
+				leftSelect.appendChild(Options[0]);
+			}
+		}
+
+		//左边双击移动 ondblclick
+		document.getElementById("first").ondblclick=function(){
+			document.getElementById("second").appendChild(this[this.selectedIndex]);
+		}
+
+		//右边双击移动 ondblclick
+		document.getElementById("second").ondblclick=function(){
+			document.getElementById("first").appendChild(this[this.selectedIndex]);
+		}
+	}
+</script>
+</html>

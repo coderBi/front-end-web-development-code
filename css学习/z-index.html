@@ -1,0 +1,52 @@
+<!-- note：z-index不应该被滥用
+一般规划：跑在地面上的1开头 空中的用2开头 广告用3开头 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>z-index</title>
+	<style>
+		.wrap {
+			background-color: silver;
+			height: 400px;
+			width: 400px;
+			position: relative;
+			border: 1px solid #000;
+		}
+		.box1, .box2, .box3 {
+			width: 100px;
+			height: 100px;
+			background-color: yellowgreen;
+			border: 1px solid teal;
+			position: absolute;
+
+		}
+		.box1 {
+			top: 0;
+			left: 0;
+			/*z-index 默认值是0*/
+			z-index: 0;
+		}
+		.box2 {
+			background-color: yellow;
+			top: 30px;
+			left: 30px;
+			z-index: 200;
+		}
+		.box3 {
+			background-color: red;
+			top: 60px;
+			left: 60px;
+			z-index: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="box1"></div>
+		<!-- 本来按照顺序应该是第三个div在最上面，但是设置第二个div的z-index可以让其在最上面 -->
+		<div class="box2"></div>
+		<div class="box3"></div>
+	</div>
+</body>
+</html>

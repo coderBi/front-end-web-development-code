@@ -1,0 +1,101 @@
+1，js包括：ecma  dom  bom
+
+2，window对象的方法调用，window.function，window可以省略。常用方法有 alert prompt  confirm()(确认框)  open()(打开新窗口)  close()(关闭窗口)
+
+3，dom：元素节点  属性节点  文本节点
+
+4，node常用方法
+a）getElementById()
+b）getElementsByName
+c) getElementsByTagName() 这个方法可以不用再document上，可以查找某一个节点的下面的子节点
+d) hasChildNodes。是否有孩子,孩子可以是文本节点或者元素节点
+e) getAttributeNode("name")
+f) replaceChild(): var oldElement=element.replaceChild(newChild,oldChild)。返回的是已被替换的那个子节点的引用。如果被插入的子节点还有自己点，也会被插入
+g）getAttribute(): 
+h）setAttribute（"name","value"）：如果没有这个属性就是创建赋值，否则是刷新数据
+i）createElement("标签名称")
+j) createTextNode(文本内容)，创建一个文本节点
+k) appendChild(newchild)
+m) insertBefore(),在一个节点前面插入, parentNode.insertBefore(newnode,tagnode)
+n）removeChild(),返回被删除节点的指针,parentnode.removeChild(childnode)
+o) replaceChild()
+---cloneNode(true/false): 如果参数是true就进行深层复制，本身跟内部节点都会进行赋值，如果参数为false只会复制本身这个节点
+
+5,dom属性
+a）nodeName：如果是元素节点返回元素的名称，如果是属性节点，返回属性的名称，如果是文本节点返回#text。这个属性是只读的
+b）nodeType：返回一个整数，这个整数代表给定节点的类型。nodeType属性的返回对应12种类型，常见的三种是 Node.ELEMENT_NODE(1) Node.ATTRIBUTE_NODE(2) Node.TEXT_NODE(3)。nodeType是只读的
+c） nodeValue，如果是属性节点返回该属性的值，如果是文本节点，返回这个节点的内容，如果是元素节点，返回null。nodeValue可读写，但是不能对元素节点的nodeValue进行设置
+d）firstChild
+e）lastChild
+f) childNodes  parentNode
+g）nextSibling:下一个兄弟节点。 previousSibling:前一个兄弟节点
+
+6，innerHTML属性： 几乎所有浏览器都支持，但是不是dom标准
+
+7，js里面数据有类型，但是变量没有类型约束
+
+8，typeof 操作对象，统一返回的是 object。但是function返回的是function
+
+9，每一个对象都可以访问到的属性
+a）constructor, 描述构造函数。对象的constructor属性是由原型对象提供的
+	function Fn(){}
+	var o=new Fn();
+	console.log( o.constructor === Fn)  // 返回的是ture
+b)__proto__，原型对象。跟相应的构造函数有关
+-----每一个函数有自己的func.name，但是对这一个属性ie支持不好----
+
+10，封装： 将复杂包括，隐藏起来，保留简单的接口
+	继承： 与java c++不同，这里的继承只要把别人的拿过来就是继承
+	a）原型继承：如果需要让一个对象有某一个行为（属性），可以考虑将它加到原型对象中。由于这个对象继承原型对象，就可以得到这个属性
+	--------
+	有时由于需要添加的属性比较多，可以进行原型覆盖： o.prototype={ xx: function(){}, jj: function(){}, constructor: Person, //如果不加上这里的constructor，由于是覆盖的，会导致得到的constructor为“Object”}
+	------------
+	b） 组合继承：将其他对象的属性加到自己身上。 var o1={name:"xx"}; var o2={age:21}; for(var k in o1){ o2[k] = o1[k]} 这样 o2继承了 o1的所有属性。可以封装一个extend函数： o2.extend = function(obj){
+		for(var k in obj){ this[k] = obj[k]}
+	}  o2.extend(o1);
+	------经典的继承方法： var o1={name: "xx"}; var o2=Object.create( o1 ); // Object.create 方法需要ie9以上的支持，火狐谷歌没有问题。这个函数返回一个对象，这个对象的原型对象的是 o1 。
+	------Object.create(), 返回的这个对象没有类型
+	------处理Object.create()兼容问题:
+		if(!Object.create){
+			Object.create = function(obj){
+				function F(){}
+				F.prototype = obj;
+				return new F();
+			}
+		}
+
+11，原型链：原型对象也有自己的原型对象，一直往上找，会找到空
+var o= new fn();
+o.__proto__=fn;
+o.__proto__.__proto__=Object;  //也即是Object.prototype
+o.__proto__.__proto__.__proto__=null;
+链实例： arr -->  Array.prototype --> Object.prototype --> null
+
+*******************************************\
+dom解析的时候，如果子标签前面书写习惯有换行，可能会导致第一个子元素是空文本
+*******************************************\
+
+******************************************************
+在js函数里面，用arguments[i] 就可以得到第几个参数
+******************************************************
+
+*******************************
+this关键字一般指的是目前作用的对象，如果找不到事件发生的对象，this代表的是window对象。
+*******************************
+
+******************************************************
+由于js中变量不能出现 '-' 所有像复合属性的css设置都会出现将 ’-‘去掉将后面单词首字母大写。例如 node.style.backgroundColor='red' 或者 node.style['backgroundColor']='red'
+******************************************************
+
+******************************************************
+关于undefined跟 not defined：
+-----如果一个变量只有申明，没有赋值或者一个已经定义的变量（对象、数组）某个属性不存在，这个时候的值就是 undefined。
+-----而 not defined 是这个变量根本没有申明，被直接拿来用。这会出错，影响后续代码的执行
+-----undefined 可以用来进行逻辑运算跟判断，但是not defined不能。 not  defined唯一一个可以用来操作的函数的 typeof
+------note: 如果一个变量已经是undefined 对其可以用typeof  但是没有办法用：　typeof xx.name
+******************************************************
+
+
+******************************************************
+跟c等其他语言不同，js里面的逻辑语句短路的值并不尽是true false：　a || b 在js里面如果a是false 就返回 b的值。 a && b || a: 这种用法表示如果a是真并且条件 b 成立，就返回 a 的值。
+******************************************************

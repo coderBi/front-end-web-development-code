@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>伪元素</title>
+	<style>
+		/*设置第一行*/
+		.article-text:first-line {
+			color:red;
+		}
+		/*设置首个字符*/
+		.article-text:first-letter {
+			font-size: 50px;
+
+		}
+		/*设置第一个子标签是span的span子标签*/
+		span:first-child {
+			color:red;
+		}
+		/*before与after都是行内元素*/
+		.wrap:before,.wrap:after {
+			/*content是before与after特有的*/
+			content: "------";
+			/*设置block显示是将上面的content内容设置为块级*/
+			display:block;
+		}
+	</style>
+</head>
+<body>
+	<p class="article-text">
+		:first-line 伪元素
+		:first-letter 伪元素
+		注释：以上两个伪元素只能用于块级元素
+
+		:first-child 伪元素，选择第一个子元素的元素
+		例如：span:first-child{}选择所有是第一个子元素的span标签
+		:before与:after伪元素，可以设置元素之前之后的内容，并且配合content设置相关内容。比如
+			#demo：before,#demo:after{content:"--";display:block;}
+	</p>
+	<div>
+		<span>第一个span</span>
+		<span>第二个span</span>
+	</div>
+
+	<div class="wrap">
+		这是一个div
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>临时测试图片之用</title>
+</head>
+<body>
+	<!-- 要注意的是这里的a对img进行了包裹，但是由于将img被设置成了block的，这是其下面的空白会突破a标签继续撑开外层的div  而且通过下面的进一步测试如果将外层a 也设置为block就没有这个问题了，猜想可能是有所以的级别问题-->
+	<div style="border:3px solid red">
+		<a href="#" style="display:inline-block; border: 5px solid green"><img src="../image/老路.png" alt="显示失败" title="老路" style="display:block">
+		</a>
+	</div>
+
+	<!-- 两者都是行内块，a会包裹img跟其下面的空白 -->
+	<div style="border:3px solid red">
+		<a href="#" style="display:inline-block; border: 5px solid green; vertical-align:middle"><img src="../image/老路.png" alt="显示失败" title="老路">
+			<!-- <span></span> -->
+		</a>
+	</div>
+
+	<!-- 将两者都设置为block -->
+	<div style="border:3px solid red">
+		<a href="#" style="display:block; border: 5px solid green"><img src="../image/老路.png" alt="显示失败" title="老路" style="display:block">
+		</a>
+	</div>
+	
+</body>
+</html>

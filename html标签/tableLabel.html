@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>table 标签</title>
+</head>
+<body>
+	<!-- table代表整个表格 -->
+	<!-- tr:表示一行  td：table data 表示一个单元格 -->
+	<!-- tbody:内容 thead：表头 -->
+	<table border="1">
+		<!-- thead里面每一个格子用th表示 -->
+		<thead>
+			<th>列表一</th><th>列表二</th>
+		</thead>
+
+		<tbody>
+			<tr>
+				<!-- rowspan表示一个单元格占用两行显示，用于行合并 colspan 表示将一行中的某个单元格占用两列，用于列的合并 -->
+				<td rowspan="2">基本参数</td><td>0.4</td>
+			</tr>
+
+			<tr>
+				<!-- <td>基本参数</td> --><td>0.5</td>
+			</tr>
+		</tbody>
+
+		<!-- tfoot表示整个表格标题 -->
+		<tfoot>自定义表格</tfoot>
+	</table>
+	
+</body>
+</html>

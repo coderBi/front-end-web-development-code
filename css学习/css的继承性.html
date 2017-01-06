@@ -1,0 +1,30 @@
+<!-- 1，css的继承性指的是标签的样式会继承其父容器的相关设置。
+2，所有的文字相关的内容都是可以进行继承的，例如：color text-系列 font-系列  line-系列  cursor
+3，并不是所有的css属性都可以继承，例如：边框，外边框，内边框，背景，定位，元素宽高属性。
+4，所有盒子相关的属性都不能继承 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css 的继承性</title>
+	<style>
+		.box {
+			color:red;
+		}
+		body {
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 可以发现下面对div字体的设置会被里面的P标签继承 -->
+	<div class="box">
+		这是div
+		<p>
+			这是div内部的一个段落
+		</p>
+	</div>
+	
+</body>
+</html>

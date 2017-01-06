@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css设置背景图</title>
+	<style>
+		#header	{
+			background-color: silver;
+			/*背景图在背景色之上，背景图会盖住背景色*/
+			background-image: url(../image/老路.png);
+			height: 900px;
+			width: 900px;
+			border: 1px solid #000;
+			/*设置横向重复*/
+			background-repeat: repeat-x;
+			/*如果接下来加上repeat-y 会覆盖上面的repeat-x*/
+			background-repeat: repeat-y;
+			/*如果要让其两个方向都进行重复，可以直接设置repeat*/
+			background-repeat: repeat;
+			/*设置图片不重复显示，只是显示一张图片*/
+			background-repeat: no-repeat;
+			/*设置图片显示的位置*/
+			background-position: top center;
+			background-position: center center;
+			background-position: -10px -10px;
+		}
+		body {
+			/*背景固定，不会随着滚动条的移动而改变*/
+			background-attachment: fixed;
+			/*背景会随着页面的滚动滚动*/
+			background-attachment: scroll;
+			/*background合写：背景颜色 背景图地址 平铺设置  背景图滚动  背景图位置*/
+			/*可以省略任何一项配置,都有相应的默认值*/
+			background: yellow url(image/1.png) no-repeat fixed 10px 10px;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="header">
+		
+	</div>
+	
+</body>
+</html>

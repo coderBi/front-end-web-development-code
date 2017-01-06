@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 练习</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<style>
+		table {border: 1px solid #000; border-collapse: collapse;}
+		table td {border: 1px solid #000;}
+		#s1,#s2 {width: 100px;}
+	</style>
+	<script>
+		$(function(){
+			//对于双击事件，一开始加到了option上面，导致option被移动之后，它的点击事件没有变化，所有第二个select新添加进来的option没有办法再被点回前一个select。
+			
+			//左边option双击
+			$('#s1').dblclick(function(){
+				$('#s1 option:selected').appendTo($('#s2'));
+			});
+
+			//右边option双击
+			$('#s2').dblclick(function(){
+				$('#s2 option:selected').appendTo($('#s1'));
+			});
+
+			//toRight
+			$('#toRight').click(function(){
+				$('#s1 option:selected').appendTo($('#s2'));
+			});
+			//toLeft
+			$('#toLeft').click(function(){
+				$('#s2 option:selected').appendTo($('#s1'));
+			});
+			//toRightAll
+			$('#toRightAll').click(function(){
+				$('#s1 option').appendTo($('#s2'));
+			});
+			//toRightAll
+			$('#toLeftAll').click(function(){
+				$('#s2 option').appendTo($('#s1'));
+			});
+
+			/**
+			//也可以通过双击option的时候判断一下其父节点，再移动。还可以在移动之后对这个option的事件进行重置
+			$('option').dblclick(function(){
+				if(this.parentNode.id == 's1'){
+					$(this).appendTo($('#s2'));
+				} else $(this).appendTo($('#s1'));
+			});
+			**/
+		});
+	</script>
+</head>
+<body>
+	<h2>练习1：jquery 实现两个select数据项移动</h2>
+	<table>
+		<td>
+			<select name="s1" id="s1" multiple='multiple' size='10'>
+				<option value="选项1">选项1</option>
+				<option value="选项2">选项2</option>
+				<option value="选项3">选项3</option>
+				<option value="选项4">选项4</option>
+				<option value="选项5">选项5</option>
+			</select>
+		</td>
+		<td>
+			<input type="button" value="-->" id="toRight"><br>
+			<input type="button" value="==>" id="toRightAll"><br>
+			<input type="button" value="<--" id="toLeft"><br>
+			<input type="button" value="<==" id="toLeftAll">
+		</td>
+		<td>
+			<select name="s2" id="s2" multiple='multiple' size='10'></select>
+		</td>
+	</table>
+</body>
+</html>

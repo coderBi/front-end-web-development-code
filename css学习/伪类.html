@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>伪类案例</title>
+	<style>
+	/*注意由于css有层叠的设置，伪类书写的顺序尽量固定
+	l-v-h-a*/
+		/*设置为没有访问过的链接*/
+		a:link {
+			color:red;
+		}
+		/*设置访问过了的链接*/
+		a:visited {
+			color:purple;
+		}
+		/*设置获取光标*/
+		a:focus {
+			font-size: 20px;
+		}
+		/*设置鼠标移动到超链接上面时候*/
+		a:hover {
+			background-color: silver;
+			color:white;
+		}
+		/*设置鼠标点击效果*/
+		a:active {
+			color:yellow;
+		}
+
+		.textName:focus {
+			background-color: green;
+		}
+	</style>
+</head>
+<body>
+	<a href="http://www.baidu.com">百度</a>
+	<a href="http://www.baidu.com">百度</a>
+	<a href="http://www.baidu.com">百度</a>
+	<input type="text" class="textName">
+</body>
+</html>

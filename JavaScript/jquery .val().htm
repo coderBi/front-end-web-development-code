@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery value属性快捷操作</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function f1(){
+			var checkedObj = $('.hby:checked');
+			var value = '';
+			for(var i=0; i < checkedObj.length; ++i){
+				value += $('.hby:checked:eq('+i+')').val();
+				if(i != checkedObj.length -1)  value +=  ',';
+			}
+			console.log(value);
+			/*
+			console.log( $('.hby:checked')[0] == $('.hby:checked:eq(0)'));  //false
+			console.log( $('.hby:checked'));  // Object {length: ……}
+			console.log( $('.hby:checked')[0]);  // <input type='checkbox' value=……>  不是jquery对象，没有.val()方法
+			console.log( $( '.hby:checked:eq(0)'));  // Object {length:1, ……}
+			*/
+		}
+		function f2(){
+			$('.hby').val([1,3]);  //快捷操作复选框
+		}
+		function f3(){
+			console.log( $('option:selected').val() );  //这样只能得到第一个的值
+			console.log( $('select').val() );  //得到一个数组。如果允许多选就会有多个值
+		}
+		function f4(){
+			$('select').val(['上海','深圳']);  //快捷操作下拉框
+			//单选的： $('select').val(['上海']);
+		}
+		function f5(){
+			console.log( $('.gender:checked').val() );  //单选只有一个值
+		}
+		function f6(){
+			$('.gender').val(['男']);  //快捷操作单选框
+			///$('.gender').val('男');  //快捷操作单选框
+		}
+	</script>
+</head>
+<body>
+	<input type="checkbox" class="hby" name="hobby[]" value="1">篮球
+	<input type="checkbox" class="hby" name="hobby[]" value="2">足球
+	<input type="checkbox" class="hby" name="hobby[]" value="3">排球
+	<input type="button" onclick="f1()" value='获取checkbox'>
+	<input type="button" onclick="f2()" value='设置checkbox'>
+
+	<select name="" id="" multiple='multiple'>
+		<option value="上海">上海</option>
+		<option value="深圳">深圳</option>
+	</select>
+	<input type="button" onclick="f3()" value='获取select'>
+	<input type="button" onclick="f4()" value='设置select'>
+	<br>
+	<input type="radio" class='gender' name='gender' value="男">男
+	<input type="radio" class='gender' name='gender' value="女">女
+	<input type="button" onclick="f5()" value='获取radio'>
+	<input type="button" onclick="f6()" value='设置radio'>
+</body>
+</html>

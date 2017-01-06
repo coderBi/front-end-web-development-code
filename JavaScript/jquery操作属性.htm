@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 操作属性</title>
+	<style>
+		.class1 {color:red;}
+	</style>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function get(){
+			//获取属性 attr
+			console.log($('input:first').attr('name'));
+			console.log($('input:first').attr('address'));
+		}
+		function set(){
+			$('input:first').attr({'address':'上海',
+				'value':'bww',
+		});
+		}
+
+		function deleteAttr(){
+			$("input:first").removeAttr('value');
+		}
+
+		function addClass(){
+			$('input:eq(4)').addClass('class1');
+		}
+
+		function removeClass(){
+			$('input:eq(4)').removeClass('class1');
+		}
+
+		function toggleClass(){
+			$('input:eq(5)').toggleClass('class1');
+		}
+	</script>
+</head>
+<body>
+	<h2>属性操作</h2>
+	<input type="text" class='apple' id='username' name='username' value='tom' address='北京'>
+	<input type="button" value="触发" onclick="get()">
+	<input type="button" value="设置" onclick="set()">
+	<input type="button" value="删除" onclick="deleteAttr()">
+	<input type="button" value="添加/删除属性值" onmousedown="addClass()" onmouseup='removeClass()'>
+	<input type="button" value="toggleClass" onclick='toggleClass()'>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js操作表格</title>
+	<script language="JavaScript">
+		//当整个页面dom结构绘制完毕，页面的所有关联的文件都加载完毕，会执行
+		window.onload=function(){
+			document.getElementById("addUser").onclick=function(){
+				//得到输入框内容
+				var nameValue=document.getElementById("name").value;
+				var ageValue=document.getElementById("age").value;
+				//创建nametd
+				var nameTd=document.createElement("td");
+				var nameText=document.createTextNode(nameValue);
+				nameTd.appendChild(nameText);
+				//创建ageTD
+				var ageTd=document.createElement("td");
+				var ageText=document.createTextNode(ageValue);
+				ageTd.appendChild(ageText);
+				//创建aTD
+				var aTd=document.createElement("td");
+				var aElement=document.createElement("a");
+				aElement.setAttribute("href","deleteEmp?id="+nameValue);
+				var deleteText=document.createTextNode("delete");
+				aElement.appendChild(deleteText);
+				aTd.appendChild(aElement);
+				aElement.onclick=function(){
+					//return的结果为false，使网页的连接失效
+					return delTr(this);
+				}
+				//创建tr
+				var trElement=document.createElement("tr");
+				trElement.appendChild(nameTd);
+				trElement.appendChild(ageTd);
+				trElement.appendChild(aTd);
+				//添加tr到table
+				document.getElementsByTagName("tbody")[0].appendChild(trElement);
+
+			}
+		}
+		/**
+		 * 删除tr
+		 */
+		function delTr(aElement){
+			var name=aElement.parentNode.parentNode.firstChild.firstChild.nodeValue;
+			var flag=window.confirm("确定删除"+name+"吗？");
+			if(flag){
+				var trNode=aElement.parentNode.parentNode;
+				trNode.parentNode.removeChild(trNode);
+			}
+			return false;
+		}
+	</script>
+</head>
+<body>
+	<input type="text" name="name" id="name">
+	<input type="text" name="age" id="age">
+	<input type="button" value="添加" id="addUser">
+	<hr>
+	<table>
+		<tbody>
+			<tr><td>小明</td>
+				<td>22</td>
+				<td>
+					<a href="javascript:void(0)" onclick="javascript:delTr(this);">delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<!-- <script language="JavaScript"></script> -->
+</html>

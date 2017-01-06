@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cloneNode js节点复制</title>
+	<script>
+		function f1(){
+			var node = document.getElementById('li1').cloneNode(true);
+			document.getElementsByTagName('body')[0].appendChild(node);
+		}
+		function f2(){
+			var node = document.getElementById('li1').cloneNode(false);  //只会复制这个li标签，li里面的内容不会复制。
+			document.getElementsByTagName('body')[0].appendChild(node);
+		}
+		window.onload = function(){
+			/** 这样是不行的  因为有多个节点， 需要对每一个的onclick进行分别的设置
+			document.getElementsByTagName('li').onclick = function(){
+				alert('xx');
+			}
+			**/
+			var nodes = document.getElementsByTagName('li');
+			for(var i = 0; i < nodes.length; ++i){
+				nodes[i].onclick = function(){alert('' + this.innerHTML);};
+			}
+		}
+	</script>
+</head>
+<body>
+	<li id='li1'>元素1</li>
+	<li>元素2</li>
+	<li>元素3</li>
+	<li>元素4</li>
+	<input type="button" value='true' onclick="f1()">
+	<input type="button" value='false' onclick="f2()">
+</body>
+</html>

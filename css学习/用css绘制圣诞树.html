@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用css绘制圣诞树</title>
+	<style>
+		div.box-leaf {
+			width: 0px;
+			height: 0px;
+			/*设置边框100 透明色*/
+			border: 100px solid transparent;
+			/*取消上边框*/
+			border-top: 0 none;
+			/*下边框改为绿色*/
+			border-bottom-color: green;
+		}
+		div.box-branch {
+			/*边框颜色设置为白色*/
+			border: 95px solid white;
+			width: 10px;
+			height: 100px;
+			background-color: silver;
+			/*取消上下边框*/
+			border-top: 0 none;
+			border-bottom: 0 none;
+		}
+	</style>
+</head>
+<body>
+	<div class="box-leaf"></div>
+	<div class="box-leaf"></div>
+	<div class="box-leaf"></div>
+	<div class="box-branch"></div>
+</body>
+</html>

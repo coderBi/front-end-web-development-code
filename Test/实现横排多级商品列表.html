@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实现横排多级商品列表</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.table-lvl {
+			padding: 3px 0px 3px 5px;
+			border: 1px solid silver;
+			background: #F5E8BA;
+			width: 500px;
+			margin: 0 auto;
+		}
+		.lvl1-title {
+			font-weight: 700;
+			font-size: 14px;
+			color: #7C6000;
+			padding: 0 1px 0 1px;
+			margin: 5px 5px 5px 5px;
+			width: 20px;
+		}
+		.lvl2-td {
+			border: 1px solid silver;
+			/*display: inline-block;*/
+			/*不能实现用margin设置td间距*/
+			/*margin-right: 10px;
+			margin-bottom:  10px;*/
+			background: white;
+			/*设置td在垂直方向向上对齐*/
+			vertical-align: top;
+		}
+		.lvl2 {
+			margin-top: 0;
+			font-size: 12px;
+			float: left;
+			margin-left: 3px;
+			margin-right: 10px;
+			margin-bottom: 5px;
+		}
+		.lvl2-title {
+			color: #900;
+		}
+
+		.list-lvl1 {
+			border: 1px solid silver;
+			background: #F5E8BA;
+			display: table;
+			margin: 0 auto;
+			width: 500px;
+			/*font-size: 0;*/
+		}
+		.list-lvl1-title {
+			display: inline-block;
+			font-weight: 700;
+			font-size: 14px;
+			color: #7C6000;
+			margin: 5px 5px 5px 5px;
+			width: 20px;
+			vertical-align: middle;
+		}
+		.list-lvl1-data {
+			display: inline-block;
+			border: 1px solid silver;
+			background: white;
+			margin: 5px 5px 5px 0px;
+			vertical-align: middle;
+		}
+		.list-lvl2 {
+			display: inline-block;
+		}
+		.list-lvl2-title, .list-lvl3 {
+			font-size: 12px;
+			display: inline-block;
+			margin-right: 2px;
+		}
+		.list-lvl2-title-link {
+			font-weight: 700;
+			color: #900;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<!-- 实现横排多级商品表格 -->
+	<table class="table-lvl">
+		<tr>
+			<td class="lvl1-title-td">
+				<div class="lvl1-title">
+					一级标题
+				</div>
+			</td>
+			<td class="lvl2-td">
+				<div class='lvl2'>
+					<strong class="lvl2-title">二级标题</strong>
+					<span class="lvl3">
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+					</span>
+				</div>
+				<div class='lvl2'>
+					<strong class="lvl2-title">二级标题</strong>
+					<span class="lvl3">
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+					</span>
+				</div>
+				<div class='lvl2'>
+					<strong class="lvl2-title">二级标题</strong>
+					<span class="lvl3">
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+						<a href="#">三级商品</a>&nbsp;
+					</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+
+	<!-- 用列表实现 -->
+	<dl class="list-lvl1">
+		<dt class="list-lvl1-title">一级标题</dt>
+		<dd class="list-lvl1-data">
+			<dl class="list-lvl2">
+				<dt class="list-lvl2-title"><a class="list-lvl2-title-link" href="#">二级标题</a></dt>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+			</dl>
+			<dl class="list-lvl2">
+				<dt class="list-lvl2-title"><a class="list-lvl2-title-link" href="#">二级标题</a></dt>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+			</dl>
+			<!-- <dl class="list-lvl2">
+				<dt class="list-lvl2-title"><a class="list-lvl2-title-link" href="#">二级标题</a></dt>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+				<dd class="list-lvl3"><a href="#">三级商品</a></dd>
+			</dl> -->
+		</dd>
+	</dl>
+</body>
+</html>

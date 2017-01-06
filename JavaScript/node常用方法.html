@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>node常用方法</title>
+</head>
+<body>
+	<form action="test.html" method="post">
+		<input type="text" name="useename" value="用户姓名" id="tid" onchange="change(this.id)">
+		<input type="text" name="tname" value="用户姓名1" id="tid_1">
+		<input type="text" name="tname" value="用户姓名2" id="tid_2">
+		<input type="button" name="ok" value="保存">
+		<select name="edu" id="edu" onchange="change(this.id)">
+			<option value="本科">本科</option>
+			<option value="硕士" id="ss">硕士</option>
+		</select>
+		<p id="pid" name="pid">段落内容</p>
+	</form>
+</body>
+<script language="JavaScript">
+	//getElementById
+	var inputElement=document.getElementById("tid");
+	//输出节点的value属性值
+	alert(inputElement.value);
+	//输出节点type属性值
+	alert(inputElement.type);
+
+	//getElementsByName
+	var tnameElements=document.getElementsByName("tname");
+	//测试该数据长度
+	alert(tnameElements.length);
+	//遍历元素
+	for(var i=0;i<tnameElements.length;i++){
+		alert(tnameElements[i].value);
+	}
+	//添加节点的onchange函数
+	for(var i=0;i<tnameElements.length;i++){
+		var tnameElement=tnameElements[i];
+		tnameElement.onchange=function(){
+			alert(this.value);
+		}
+	}
+	//写一个函数，实现当一个输入框的内容改变的时候弹出改变后的值
+	function change(id){
+		alert(document.getElementById(id).value)
+	}
+
+	//getElementsByTagName
+	var inputElements=document.getElementsByTagName("input");
+	//遍历
+	for(var i=0;i<inputElements.length;i++){
+		if(inputElements[i].type !='button'){
+			alert(inputElements[i].value);
+		}
+	}
+	//hasChildNodes
+	alert(document.getElementById("edu").hasChildNodes());
+	alert(document.getElementById("tid_1").hasChildNodes());
+	alert(document.getElementById("pid").hasChildNodes());
+
+
+	//nodeValue  nodeType  nodeName
+	//元素节点
+	tnameElement=document.getElementById("tid_1");
+	alert(tnameElement.nodeName); //input
+	alert(tnameElement.nodeType); //1
+	alert(tnameElement.nodeValue); //null
+	//文本节点
+	tnameElement=document.getElementById("pid");
+	alert(tnameElement.firstChild.nodeName); //#text
+	alert(tnameElement.firstChild.nodeType); //3
+	alert(tnameElement.firstChild.nodeValue); //段落内容
+	//属性节点
+	tnameElement=document.getElementById("pid").getAttributeNode("name");
+	alert(tnameElement.nodeName); //name
+	alert(tnameElement.nodeType); //2
+	alert(tnameElement.nodeValue); //pid
+
+	//getAttribute  setAttribute
+	tnameElement=document.getElementById("pid");
+	//获取属性
+	alert(tnameElement.getAttribute("name"));
+	//设置属性
+	tnameElement.setAttribute("name","pidddd");
+	alert(tnameElement.getAttribute("name"));
+
+	//createElement
+	var newElement=document.createElement("option");
+	//添加属性
+	newElement.setAttribute("value","小学");
+	//创建文本节点,添加到新节点
+	var textNode=document.createTextNode("小学");
+	newElement.appendChild(textNode);
+	//添加到父节点
+	document.getElementById("edu").appendChild(newElement);
+
+	//insertBefore
+	var newElement=document.createElement("option");
+	//添加属性
+	newElement.setAttribute("value","大专");
+	//创建文本节点,添加到新节点
+	var textNode=document.createTextNode("大专");
+	newElement.appendChild(textNode);
+	//获取插入之前的目标节点
+	var tagNode=document.getElementById("ss");
+	document.getElementById("edu").insertBefore(newElement,tagNode);
+
+	//lastChild 
+	if(document.getElementById("edu").lastChild != tagNode){
+		document.getElementById("edu").appendChild(newElement);
+	}
+
+	//innerHTML属性
+	document.getElementsByTagName("body")[0].innerHTML="<h1>今天</h1>";
+</script>
+</html>

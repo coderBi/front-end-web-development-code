@@ -1,0 +1,87 @@
+<!-- 1,html默认是流式布局的，也就是从左到右从上到下进行布局。 
+例如如果某个盒子到了浏览器右边缘浏览器会自动进行换行显示
+2，默认是不浮动的，浮动只有left right两种浮动
+3，某个浮动元素，如果上一个元素也是浮动的，那么这个元素顶部会跟上一个元素的顶部对其，如果上一个元素是标准流，其顶部跟上一个元素的底部对其
+4，浮动之后，元素会具有行内块的特性，也就是有了包裹性，如果没有设置它的宽高，就会根据里面的内容的大小来决定自己的大小
+5，浮动的塌陷：如果浮动的容器的父容器没有设置高度，那么这个元素的浮动可能会导致其父容器的高度变成了0
+6，overflow可以触发元素的bfc，可以让元素具有独立的排版的空间和权限，在bfc内部所有的元素都依据父元素进行排版和布局，所有的父元素具有了包裹性，这就解决了高度塌陷的问题 
+7，浮动同样触发了bfc，只是这是默认的overflow是visible
+8，其他可以触发bfc的有：定位 dipllay table table-cell等-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css浮动</title>
+	<style>
+		* {
+			padding: 0px;
+			margin: 0px;
+		}
+		.div-float {
+			width:100px;
+			height:100px;
+			/*浮动上去之后会不占据标准流的空间，但是会影响标准流中间的文字的排版*/
+			float: left;
+			background-color: yellow;
+		}
+		.div-nofloat {
+			width: 300px;
+			height: 300px;
+			background-color: blue;
+			color: green;
+		}
+		.div-overflow {
+			border: 1px solid red;
+			/*overflow: 
+			1，visible(默认）内容不会被修剪，会出现在元素框之外
+			2，hidden 溢出的内容会被修剪，并且被修剪的内容是不可见的
+			3，auto 在需要的时候产生滚动条，适应所要显示的内容
+			4，scroll 溢出的内容会被修剪，但是会始终存在滚动条
+			note: scroll比auto多了一个水平的滚动条，并且如果
+			放得下内容的时候auto是没有滚动条的，但是scroll的滚动条一直都在;
+			*/
+			overflow: hidden; /*超出部分进行隐藏，如果没有设置高度，而且发生了浮动溢出，这时候会自动的包裹它的所有子元素*/
+		}
+	</style>
+</head>
+<body>
+	<div class="div-float"></div>
+	<div class="div-nofloat">
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+	</div>
+
+	<div class="div-overflow">
+		<div class="div-float"></div>
+	</div>
+
+	<div class="div-nofloat" style="height: 50px; overflow:visible">
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="div-nofloat" style="height:  50px;overflow:auto">
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="div-nofloat" style="height: 50px;overflow: scroll">
+		div中的内容<br>
+		div中的内容<br>
+		div中的内容<br>
+	</div>
+</body>
+</html>

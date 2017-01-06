@@ -1,0 +1,34 @@
+<!-- 通过测试，a标签属于很特殊的行内标签，一般还是将其修改为行内块属性使用比较方便 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test6-a-overflow:hidden</title>
+	<style>
+		.a-label {
+			overflow:hidden;
+			border: 10px solid #000;
+			/*display:inline-block;*/
+		}
+		.div-test {
+			height:100px;
+			width: 100px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<!-- 注1：给a标签添加overflow:hidden但是没有看到效果，通过审查元素，可以发现，虽然img已经处于a标签之外了，但是overflow并没有起作用，img标签突破了a标签撑开div标签 -->
+	<div>
+		<a href=""  class="a-label">
+			<img src="../image/老路.png" alt="">
+		</a>
+	</div>
+	
+	<!-- 注2：通过测试，下面的div会压到上面div里面的a的border，进一步审查元素可以知道，其实a标签下面的border是超出其父容器的。其左右border会被包裹 -->
+	<div class="div-test">
+		<img src="../image/老路.png" alt="">
+	</div>
+	
+</body>
+</html>

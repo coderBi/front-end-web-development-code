@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 面向对象</title>
+	<script language="JavaScript">
+		//返回object
+		console.log(typeof {});
+		//数组也返回object
+		console.log(typeof []);
+		//number
+		console.log(typeof 123);
+		// typeof date  RegExp都是object
+		console.log(typeof new Date());
+		console.log(typeof /123/);
+		//typeof 函数，返回function
+		console.log(typeof function(){});
+		// 构造函数就是类型的名称。同样返回object
+		function Person(){}
+		var p=new Person();
+		console.log(typeof p);
+		//function， 构造函数
+		console.log(typeof Person);
+
+		//传统方法获取对象名称
+		var s=""+p.constructor; //得到构造函数并转换成字符串
+		var start = s.replace("function","|").indexOf("|");  //将function替换成 | 并且返回第一个 | 的位置
+		if( start != -1){
+			var end = s.replace("function","|").indexOf("("); //返回左括号位置
+			if( end != -1){
+				var name = s.replace("function","|").slice(start+2,end); //start + 2是为了减去前面的 | 跟一个空格
+				console.log(name);
+			}
+		}
+
+		// 利用正则表达式获取对象名称  . 代表任意字符  (是特殊字符  需要转义
+		var r=/function (.+?)\(/;
+		var name = r.exec(s)[1];  //匹配到的数组里面取第一组
+		console.log(name);
+
+		//每一个函数都有个 name 属性 不过ie8不支持
+		//这个代码在火狐运行结果是 Person， 但是在ie里面 得到的是undefined
+		console.log(p.constructor.name);
+
+		//添加浏览器兼容支持，获取对象类型
+		function getFnName(fn){
+			if(typeof fn !== 'function') return;
+			if(fn.name){
+				return fn.name;
+			} else {
+				var s=""+fn;
+				var str=s.replace("function","|");
+				var start,end;
+				if( (start=str.indexOf("|") ) != -1 && ( end=str.indexOf("(") ) != -1){
+					return str.slice(start+2,end);
+				}
+			}
+			//也可以用正则
+			return fn.name ? fn.name : /function (.+)\(/.exec(fn)[1];
+		}
+		getFnName(p.constructor) ? console.log(getFnName(p.constructor)) : alert("不是function类型");
+
+		function test(){name:"xx"}
+		var ox=new test();
+		alert(""+ox.__proto__);
+		alert(""+ox.__proto__.__proto__);
+		alert(""+ox.__proto__.__proto__.__proto__);
+		var oj = new Object();
+		alert(""+oj.__proto__);
+		alert(""+oj.__proto__.__proto__);
+		var i=0;
+	</script>
+</head>
+<body>
+</body>
+</html>

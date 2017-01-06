@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>form 标签</title>
+</head>
+<body>
+	<!-- 所有的表单标签必须被包裹在form标签里面 -->
+	<form action="#">
+		<!-- type:文本框内容  value：文本框的值 -->
+		用户名：<input type="text" value="123">
+		<br>
+		<!-- name相同表示input属于一个组 -->
+		<!-- 添加checked="checked" 可以默认被选中 -->
+		性别：男<input type="radio" checked="checked" name="gender">女<input type="radio" name="gender">
+		<br>
+
+		<!-- 密码框：type= -->
+		密码：<input type="password">
+		<br>
+		<!-- 多选框 -->
+		<input type="checkbox">
+		<input type="checkbox">
+		<!-- 添加checked可以默认被选中 -->
+		<!-- 添加label for可以让文字点击实现相应id标签的效果 -->
+		<input type="checkbox"id="checkbox-3" checked><label for="checkbox-3">按钮3</label>
+		<br>
+		
+		<!-- 提交按钮 -->
+		<input type="submit" value="提交">
+		<br>
+		<!-- 普通按钮 -->
+		<input type="button" value="这是一个button">
+		<br>
+		<!-- 重置按钮 -->
+		<input type="reset" value="重置">
+		<br>
+		
+
+		<!-- select:下拉列表标签 -->
+		<select>
+			<option value="1">公历</option>
+			<option value="2">农历</option>
+		</select>
+		<br>
+		
+		<!-- multiple="multiple" 生成一个直接展开的下拉列表 -->
+		<!-- multiple与上面的checked标签一样是单值属性，可以不去指定值 -->
+		<select multiple="multiple">
+			<option value="1">公历</option>
+			<!-- 添加selected="true" 可以默认被选中 -->
+			<option value="2" selected="true">农历</option>
+		</select>
+		<br>
+
+		<!-- 文本域标签：textarea -->
+		<textarea cols="20" rows="10">
+			内容
+		</textarea>
+
+
+	</form>
+	
+</body>
+</html>

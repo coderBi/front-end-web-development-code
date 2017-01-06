@@ -1,0 +1,57 @@
+<!-- inline-block之间的空隙产生的原因是 各个容器之间可能有空格符
+或者换行符之类的，在浏览器上面显示为容器之间隔着一个空格 -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>消除inline-block之间空格</title>
+		<style>
+			/*消除空格的第一种方式是设置父容器的font-size=0
+			然后在子容器里面将font-size再设置回来*/
+			/*另外还可以实现消除空格功能：
+			1，float方法会让其变成块，不会在受font-size的影响
+			2，使用注释连接各个块，例如
+					<span></span><!--
+					--><em></em>
+			3, 通过修改letter-spacing 或者 word-spacing消除空格*/
+			div.div1 {
+				font-size: 0;
+			}
+			span.span1 {
+				display: inline-block;
+				width:300px;
+				height:300px;
+				border: 1px solid #000;
+				background-color: silver;
+				font-size: 20px;
+			}
+			div.div2 {
+
+			}
+			span.span2 {
+				display: inline-block;
+				width:300px;
+				height:300px;
+				border: 1px solid #000;
+				background-color: silver;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="div1">
+			<!-- 由于两个span中间这里有换行，所有它们之间会有一个空格 -->
+			<span class="span1">1</span>
+			<span class="span1">2</span>
+			<!-- 下面的书写直接相邻,没有空格产生 -->
+			<span class="span1">3</span><span class="span1">4</span>
+		</div>
+		<br>
+		
+		<!-- 使用margin为负数（向另一个容器移动）消除空隙 -->
+		<div class="div2">
+			<span class="span2">1</span>
+			<span class="span2" style="margin-left: -10px">2</span>
+		</div>
+	</body>
+</html>

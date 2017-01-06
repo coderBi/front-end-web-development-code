@@ -1,0 +1,47 @@
+<!-- 1，之前提到的层叠性是在样式的优先级相同的前提下的
+2,优先级：行内样式 > id选择器 > 类选择器 > 标签选择器
+3，继承的样式 > 浏览器默认样式
+4,通配符样式优先级 > 继承的样式
+5,标签样式选择器 > 通配符样式选择器 
+6， 组合选择器最好不要超过三层，否则效率不高，另外由于css是从右向左进行解析的，所以越靠内部的越不适合太宽泛，否则也会影响效率-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css的优先级</title>
+	<style>
+		#text-wrap {
+			color:yellow;
+		}
+		.box {
+			color:green;
+		}
+		* {
+			color:red;
+		}
+		h1 {
+			color:blue;
+		}
+		.aside-dd {
+			color:yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="box" id="text-wrap" style="color:blue">
+		div中间的文字
+	</div>
+	<div class="wrap">
+		<div class="aside">
+			<div class="aside-dt">
+				<h1>标题1</h1>
+			</div>
+			<div class="aside-dd">
+				<p>
+					一个段落.
+				</p>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

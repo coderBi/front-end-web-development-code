@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 操作 css</title>
+	<style>
+		.div1 {color:red; width:100px;height: 100px;border: 1px solid #000;}
+	</style>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function get(){
+			console.log(document.getElementById('div1').style);   //只能获得行内样式  CSSPProperties {background-color:green}
+			console.log( $('.div1').css('width') );  //可以获取到内联样式表（跟外联）的设置
+			console.log('border:' + $('.div1').css('border')); //复合的样式，直接获取 得到空
+			//逐个获取复合样式的属性
+			console.log('border-style:' + $('.div1').css('border-style'));  // 因为border还有上下左右，所以border-style也得到空
+			console.log('border-left-style:' + $('.div1').css('border-left-style'));  //成功获取 solid
+			console.log('border-left-width:' + $('.div1').css('border-left-width')); // 1px
+
+			//添加css。 jquery .css()都是添加到行内的
+			$('.div1').css('border-left-width','3px');
+			//复合样式是可以直接进行设置的
+			$('.div1').css('border','5px solid silver');
+		}
+	</script>
+</head>
+<body>
+	<div class='div1' id='div1' style='background-color:green;'>div1</div>
+	<input type="button" value='获取and设置' onclick='get()'>
+</body>
+</html>

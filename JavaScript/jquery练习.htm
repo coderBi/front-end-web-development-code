@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 练习</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<style>
+		#tb1 {border: 1px solid #000; border-collapse: collapse;}
+		#tb1 td {border: 1px solid #000;}
+	</style>
+	<script>
+		window.onload = function(){
+			f1();
+		}
+		function f1(){
+			$('#tb1 tr:eq(0)').css('background-color','yellow'); //第一行，也就是标题栏
+			$('#tb1 tr:odd').css('background-color','white');  //奇数(索引)行
+			$('#tb1 tr:even:not(:first)').css('background-color','lightblue'); //偶数(索引)行，不包含第一行
+		}
+		function f2(){
+			/**
+			var img = $('img');
+			var width = img.css('width');
+			width = width.slice(0,width.length - 2);
+			width *= 2;
+			var height = img.css('height');
+			height = height.slice(0,height.length - 2);
+			height *= 2;
+
+			img.css('width',width+'px');
+			img.css('height',height+'px');
+			**/  //不需要通过 .css()设置  可以直接 $().width
+			var img = $('img');
+			img.width(img.width() + 5);
+			img.height(img.height() * (img.width() + 5) / img.width());
+		}
+		function f3(){
+			var img = $('img');
+			img.width(img.width() - 5);
+			img.height(img.height() * (img.width() - 5) / img.width());
+		}
+		function f4(){
+			//jquery 1.6以后 checked是特性，不用 attr操作，用prop操作
+			$('div input:not(first)').prop('checked',$('div input:first').prop('checked'));
+		}
+	</script>
+</head>
+<body>
+	<h2>练习1：表格隔行显色</h2>
+	<table id='tb1'>
+		<thead>
+			<tr>
+			<td>姓名</td>
+			<td>性别</td>
+			<td>年龄</td>
+		</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>bww</td>
+				<td>男</td>
+				<td>20</td>
+			</tr>
+			<tr>
+				<td>tom</td>
+				<td>男</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>lily</td>
+				<td>女</td>
+				<td>20</td>
+			</tr>
+		</tbody>
+	</table>
+	<h2>练习2：图片等比例缩放</h2>
+	<div><img src="./pic1.png" alt="等比例缩放图片"></div>
+	<input type="button" onclick="f2()" value='放大'>
+	<input type="button" onclick="f3()" value='缩小'>
+	<h3>练习3：通过一个复选框控制其他复选框的装填</h3>
+	<div>
+		<input type="checkbox" class='check1' onclick='f4()' value='xx'><br>
+		<input type="checkbox" class='check1'>复选框1<br>
+		<input type="checkbox" class='check1'>复选框2
+	</div>
+</body>
+</html>

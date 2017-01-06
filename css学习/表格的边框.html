@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格的边框</title>
+	<style>
+		table {
+			border: 1px solid black;
+			/*设置table边框collapse，只显示td边框（最外边缘
+			td边框对table边框覆盖，同时里面的td边框之间的空隙被填充）*/
+			border-collapse: collapse;
+		}
+		td {
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+		</tr>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+		</tr>
+		<tr>
+			<td>123</td>
+			<td>123</td>
+			<td>123</td>
+		</tr>
+		<tfoot>表格1</tfoot>
+	</table>
+	
+</body>
+</html>

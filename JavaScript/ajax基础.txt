@@ -1,0 +1,60 @@
+1, ajax： 异步js and xml
+
+2，ajax，一开始由微软提出叫做，xmlhttp，后被谷歌运用大火。
+
+3，主要属性
+readyState: 0: 创建对象
+			1：调用了open方法
+			2: 调用了send方法
+			3：文件部分传输
+			4：文件已经全部传输完成
+onreadystatechange: 指定readyState属性改变的时候事件处理的句柄。只写
+responseText: 将响应信息作为字符串返回。只读
+responseXML: 将响应信息格式化为xml document对象返回。只读
+status：返回请求返回的状态码： 200 302 304  403 404 500
+
+4，创建、使用:
+主流浏览器：xhr= new XMLHttpResquest();
+ie7以前： xhr =new ActiveXObject("Microsoft.XMLHTTP")
+---- xhr.open("get/post","url","true/false: 表示是否异步传输")。如果页面输出是ajax请求内容，需要同步请求
+---- xhr.send("请求内容"), 如果是get请求，设置为null
+---- 如果是post提交，xhr.send(info)，里面要设置传递的info，同时需要设置请求头：xhr.setRequestHeader("content-type","application/x-www-form-urlencoded"); form表单的数据是用xml的格式进行传递的。因为是设置头，所以setRequestHeader需要放在open 跟 send 之间
+-----get 提交，特殊字符跟中文在主流浏览器中会自动进行编码，ie不会。post提交，所有浏览器都会对中文字符进行编码，但是对特殊字符不会进行编码。
+5, php中用urlencode与urldecode()进行特殊编码。js里面有encodeURIComponent()进行特殊编码。例如请求地址里面的空格 = & 中文字符
+
+5，ajax存在必要性： 节省流量  减少服务器压力 减少用户等待
+
+6，ajax操作缓存：
+对于css img js等文件可以进行缓存，但是对于动态程序文件，例如php文件不能缓存，即使是缓存了也得去取消其缓存效果。火狐等浏览器对php页面没有缓存，但是ie对php会出现缓存。
+----为了避免缓存第一种解决方法是在文件的后面加上一个随机数： a.php? + Math.random()
+----可以设置header头，禁止缓存，不过由于header只能在代码最前面，php文件多重嵌套可能出现问题
+	//针对不同的浏览器可能支持不同的设置方法，所以下面三条语句一般一起写；
+	header("Cache-Control:no-cache");
+	header("pragma:no-cache");
+	header("expires:-1");
+
+7，JSON: javascript object notation (js对象标记)
+----为了各种语言，例如java php .net  js 都可以识别，所以数据入口一般是json或者xml。json比xml更简单。
+----php生成json编码： json_encode()
+----php解码：json_decode()
+-----note: 如果js_encode()操作的是索引数组，不会生成json对象，会得到一个js数组
+-----js里面把json字符串变为js对象：eval("var js_obj = " + json_str); 这样执行之后， js_obj就得到了json对象
+-----一个页面应该只调用一次json_encode，然后将结果打给浏览器
+
+8，利用h5技术中的FormData快速获取表单数据。目前主流浏览器都已经支持，ie8及以前不支持
+-----如果用FormData就不能再send前面调用xhr.setRequestHeader()了、
+------为了安全，浏览器禁止js操作本地文件。
+-------formdata也可以采集到上传文件域信息、不需要设置enctype
+
+9, ajax的upload属性：属于XMLHTTPRequestUpload对象，里面有一个onprogress事件，每隔0.1s执行一次。
+
+10，ajax 反向推技术：例如手机刷电脑浏览器二维码，成功后，浏览器会自动跳转。实现的便是ajax每间隔1s或2s就去请求一次状态信息。
+------实现： 给ajax做一个轮询，setInterval
+
+11，div设置滚动条
+----设置高度/宽度。overflow:auto: 这样内容超出了就会显示滚动条
+----滚动条显示在最下面： div.scrollTop = div.scrollHeigth - div.style.height: 意思是包括滚动条滚动的总高度减去div本身的高度，剩下的就是滚动到最下面需要的滚动 “scrollTop” 的值
+
+12, 解决ajax不能跨域请求的问题： 用一个中间php文件进行请求的代理，php本身是可以进行跨域请求的
+---------file_get_contents(filepath/url): 这个函数既可以得到本地文件内容，也可以得到url文件请求的内容。
+---------在中转php文件里面，利用file_get_contents得到跨域请求的内容，然后打给ajax请求

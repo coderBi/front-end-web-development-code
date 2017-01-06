@@ -1,0 +1,307 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+}
+
+.frame {
+	width: 900px;
+	margin: 0 auto;
+}
+
+/*标题栏 S*/
+.title {
+	width: 900px;
+	border: 1px solid #d5d5d5;
+	background-color: #f1f1f1;
+	/*处理可能出现的塌陷*/
+	overflow: hidden;
+}
+
+.title-content {
+	/*尽量避免float*/
+	/*float: right;*/
+	/*利用display: table;触发bfc 否则他会充满整个父容器，导致下面的margin设置失效*/
+	display: table;
+	margin-right: 0px;
+	margin-left: auto;
+}
+.shoppingcar, .order {
+	/*取消超链接文字修饰*/
+	text-decoration: none;
+	display: inline-block;
+	height: 21px;
+	line-height: 21px;
+}
+.shoppingcar-icon {
+	display: inline-block;
+	height: 21px;
+	/*内部块中间对齐*/
+	vertical-align: middle;
+}
+/*标题栏 E*/
+
+/*搜索栏 S*/
+.seacher {
+	border-bottom: 2px solid black;
+	padding: 0px 0px 25px 5px;
+	/*display: table;*/
+}
+.shop-logo, .seacher-normal, .seacher-high {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.shop-logo {
+	margin-right: 30px;
+}
+.seacher-normal {
+	margin-right: 5px;
+}
+
+.seacher-normal-box, .seacher-button {
+	display: inline-block;
+	vertical-align: middle;
+}
+.seacher-normal-box {
+	margin-bottom: -14px;
+}
+.seacher-normal .seacher-blank {
+	display: inline-block;
+	border: 1px solid #e49800;
+	height: 28px;
+	width: 340px;
+	font-family: "宋体";
+	color: #cc9900;
+	margin-right: 5px;
+	
+}
+
+.seacher-high {
+	text-decoration: none;
+}
+
+/*去掉seacher-normal-box下面的a标签文字修饰。不过这样的写法不推荐，因为效率不高
+a属于很常用的标签*/
+.seacher-normal-box a{
+	font-size: 10px;
+}
+
+/*搜索栏 E*/
+
+/*菜单栏 S*/
+.menu {
+	height: 33px;
+	width: 900px;
+	background: url(image/menu-bg.gif) repeat-x;
+}
+.menu-ul {
+	display: table;
+	/*background: url(image/menu-bg.gif) repeat-x;*/
+	list-style: none;
+}
+.menu-li {
+	float: left;
+	/*text-decoration: 不继承*/
+	/*text-decoration: none;*/
+	margin-right: 25px;
+	font-size: 25px;
+	line-height: 33px;
+}
+.menu-li-link {
+	font-size: 25px;
+	text-decoration: none;
+	line-height: 33px;
+}
+.menu-li-link, .menu-li-link:visited {
+	color: red;
+}
+.menu-li-link:hover {
+	color: blue;
+}
+/*菜单栏 E*/
+
+/*内容区 S*/
+.content {
+	margin-top: 5px;
+	display: table;
+}
+.main {
+	float: left;
+	margin-right: 7px;
+	width: 678px;
+}
+.main1, .main2 {
+	margin-bottom: 5px;
+}
+.main1-left {
+	width: 182px;
+	font-size: 0;
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: top;
+}
+.main1-right {
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid silver;
+	font-size: 0;
+}
+.main1-left-login, .main1-left-resgister {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.main1-left-text {
+	display: inline-block;
+	width: 182px;
+	border: 1px solid silver;
+}
+.main1-left-text-span {
+	display: block;
+	/*每一行都居中*/
+	text-align: center;
+}
+.main1-right-image:hover {
+	display: inline-block;
+	height: 242px;
+	margin-top: -1px;
+	margin-left: -1px;
+}
+.main2-table {
+	width: 678px;
+	border: 1px solid silver;
+	background: #F5E8BA;
+	margin-bottom: 5px;
+}
+.main2-lvl1-title {
+	font-weight: 700;
+	font-size: 14px;
+	color: #7C6000;
+	padding: 0 1px 0 1px;
+	margin: 5px 5px 5px 5px;
+	width: 20px;
+}
+
+.main2-lvl1-data {
+	background-color: white;
+	border: 1px solid silver;
+	vertical-align: top;
+}
+.main2-lvl2 {
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 0;
+	margin-bottom: 5px;
+}
+.main2-lvl2-title, .main2-lvl3-data {
+	font-size: 12px;
+	margin-right: 5px;
+
+}
+.main2-lvl2-title {
+	color: #900;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.aside {
+	margin-left: 685px;
+	font-size: 0;
+}
+.aside-most-liked, .aside-most-sold, .aside-we-introduce, .aside-we-in-touch {
+	/*将并排的子容器都设置成为inline-block 又由于目前的剩余大小只能在一行放下一张图片，所以每一行右边会被撑起来一部分空间
+	这一部分空间可以用来处理这个行内块被挤压时候向右移动，而不会被挤压到向下换行*/
+	display: block;
+	border: 0px solid red;
+	margin-bottom: 5px;
+	/*border: 1px solid silver;*/
+}
+.aside-most-liked-link, .aside-most-sold-link, .aside-we-introduce-link, .aside-we-in-touch-link {
+	font-size: 0;
+	display: block;
+}
+.aside-most-liked-label {
+	background: url(image/aside-most-liked-label.gif) no-repeat;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+#liked-pople-num {
+	color: red;
+}
+.aside-we-introduce-item, .aside-most-sold-item {
+	display: inline-block;
+}
+.aside-we-introduce-item-imgLink, .aside-we-introduce-item-textLink {
+	display: block;
+	width: 90px;
+}
+.aside-most-sold-item-imgLink, .aside-most-sold-item-textLink {
+	display: block;
+	width: 90px;
+}
+.aside-we-introduce-item-imgLink, .aside-most-sold-item-imgLink {
+	/*设置a标签的font-size为0 是为了其中间的行内块标签img下面没有空白*/
+	font-size: 0px;
+}
+.aside-we-introduce-item-textLink, .aside-most-sold-item-textLink {
+	text-align: center;
+}
+.aside-we-introduce-item-img, .aside-most-sold-item-img {
+	width: 90px;
+	height: 90px;
+}
+.aside-we-in-touch-table {
+	background: #fdfcfe;
+	font-size: 12px;
+	color: #8cb43c;
+}
+.aside-we-in-touch-table-tr {
+	margin-bottom: 5px;
+}
+.aside-we-in-touch-table-ltd {
+	width: 3em;
+}
+
+/*内容区 E*/
+
+/*页脚区 S*/
+.footer {
+	border-top: 3px solid green;
+	padding-top: 2px;
+}
+.footer-div1, .footer-div2, .footer-div3 {
+	/*触发bfc*/
+	display: table;
+	margin-bottom: 10px;
+}
+.footer-div1, .footer-div3 {
+	width: 900px;
+}
+.footer-div1-dl {
+	float: left;
+	margin-left: 100px;
+}
+.footer-div1-dl a {
+	text-decoration: none;
+}
+.footer-div1-dt {
+	color: red;
+}
+.footer-div2 {
+	margin: 0 auto;
+}
+.footer-div2-ul {
+	list-style: none;
+}
+.footer-div2-li {
+	float: left;
+	margin-right: 5px;
+}
+.footer-div3 {
+	text-align: center;
+}
+/*页脚区 E*/

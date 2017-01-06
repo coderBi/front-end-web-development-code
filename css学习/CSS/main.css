@@ -1,0 +1,10 @@
+/*a：称为选择符  color：属性  yellow：属性值*/
+/*换行空格 大小写都不明感*/
+a {
+	color:yellow;
+}
+
+h1{
+	width: 20px;
+	height: 200px;
+}

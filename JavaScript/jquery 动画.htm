@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 动画</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function f1(){
+			//让div进行隐藏
+			$('div:first').hide(1000);  //其实就是通过添加display：none
+		}
+		function f2(){
+			//让div进行隐藏
+			$('div:first').show(1000);
+		}
+		function f3(){
+			//让div进行隐藏
+			$('div:eq(1)').slideUp(1000);
+		}
+		function f4(){
+			//让div进行隐藏
+			$('div:eq(1)').slideDown(1000);
+		}
+		function f5(){
+			//让div进行隐藏
+			$('div:eq(2)').fadeOut(5000);
+		}
+		function f6(){
+			//让div进行隐藏
+			$('div:eq(2)').fadeIn(1000);
+		}
+
+		$(document).ready( function(){ $('body').fadeTo(0,0.9); $('body').css('background-color','RGB(100,100,100)');} );
+	</script>
+</head>
+<body>
+	<h2>基本动画</h2>
+	<div style='width:300px;height:300px;background-color:green;'>today is a good day</div>
+	<br>
+	<input type="button" value='隐藏' onclick='f1()'>
+	<input type="button" value='显示' onclick='f2()'>
+	<input type="button" value='toggler' onclick='javascript:$("div:first").toggle();'>
+	<h2>垂直动画</h2>
+	<div style='width:300px;height:300px;background-color:green;'>tomorrow is a good day too</div>
+	<br>
+	<input type="button" value='隐藏' onclick='f3()'>
+	<input type="button" value='显示' onclick='f4()'>
+	<input type="button" value='toggler' onclick='javascript:$("div:eq(1)").slideToggle();'>
+	<h2>颜色渐变动画</h2>
+	<div><div style='width:300px;height:300px;background-color:green;'>tomorrow is a good day too</div></div>
+	<br>
+	<input type="button" value='隐藏' onclick='f5()'>
+	<input type="button" value='显示' onclick='f6()'>
+	<input type="button" value='toggler' onclick='javascript:$("div:eq(2)").fadeToggle();'>
+	<input type="button" value='fadeTo' onclick='javascript:$("div div").fadeTo(0,0.5);'>  <!-- 给中间的一层添加透明度渐变，实现阴影效果 -->
+</body>
+</html>

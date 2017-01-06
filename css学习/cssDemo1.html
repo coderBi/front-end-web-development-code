@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>书写css案例--浏览器默认样式</title>
+	<!-- 在head标签里面添加style标签：内嵌样式 -->
+	<!-- style 默认type是text/css 故下面的type可是省略 -->
+	<style type="text/css">
+
+		/*由于不方便并行下载，所以目前import方式已经不建议使用了*/
+		/*import指令放在style标签里面，而且必须要放在其他设置之前*/
+		@import url(CSS/main.css); /*将某一个样式表的内容直接复制到当前的位置*/
+
+		p {
+			color: green;/*设置前景色，也就是字体的样色（css中只有这一种注释方式）*/
+			background-color: silver; /*设置背景色*/
+		}
+		ul {
+			background-color: red;
+		}
+		
+	</style>
+
+	<!-- 通过link标签引入外部样式表，rel:relation关系 href存放文件地址 -->
+	<!-- 一般使用外联样式最多，很少使用内嵌，基本不用行内样式 -->
+	<!-- <link rel="stylesheet" href="CSS/main.css"> -->
+</head>
+<body>
+	<!-- 常用通用属性 id name style -->
+	<!-- 行内样式，是通过在标签中设置style属性达到控制样式的效果 -->
+	<h1 style="color:red; font-size:12px">标题1</h1>
+
+	<!-- 可以发现所有标签都是有默认的样式的，例如下面的a标签默认是蓝色跟下划线 -->
+	<!-- 默认样式是受不同的浏览器影响的，所有标签都有默认样式，又称为浏览器样式-->
+
+	<!-- ul>(li>a[href="#"])*3 []内部放置属性,>代表父子关系 -->
+	<ul>
+		<li><a href="#">北京</a></li>
+		<li><a href="#">上海</a></li>
+		<li><a href="#">深圳</a></li>
+	</ul>
+	<p>
+		这是一个段落，样式被内嵌样式控制。
+	</p>
+</body>
+</html>

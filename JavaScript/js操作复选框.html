@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js操作复选框</title>
+</head>
+<body>
+	<input type="checkbox" name="checkTtems" id="checkItems" value="全选/全部选">全选/全部选<br>
+	<input type="checkbox" name="items" value="足球">足球</input>
+	<input type="checkbox" name="items" value="篮球">篮球</input>
+	<input type="checkbox" name="items" value="游泳">游泳</input>
+	<input type="checkbox" name="items" value="唱歌">唱歌</input>
+	<br>
+	<input type="button" name="checkall" id="checkall" value="全选">
+	<input type="button" name="checkall" id="checkallNo" value="全不选">
+	<input type="button" name="checkall" id="check_reverse" value="反选">
+</body>
+<script language="JavaScript">
+	window.onload=function(){
+		//全选
+		document.getElementById("checkall").onclick=function(){
+			var itemElements=document.getElementsByName("items");
+			for(var i=0;i<itemElements.length;++i){
+				itemElements[i].checked=true;
+			}
+		}
+
+		//全部选
+		document.getElementById("checkallNo").onclick=function(){
+			var itemElements=document.getElementsByName("items");
+			for(var i=0;i<itemElements.length;++i){
+				//这里如果是用setAttribute("checked",null)，只有ie有效果
+				itemElements[i].checked=false;
+			}
+		}
+
+		//反选
+		document.getElementById("check_reverse").onclick=function(){
+			var itemElements=document.getElementsByName("items");
+			for(var i=0;i<itemElements.length;++i){
+				if(itemElements[i].checked==false)
+					itemElements[i].checked=true;
+				else
+					itemElements[i].checked=false;
+			}
+		}
+
+		//全选/全不选
+		document.getElementById("checkItems").onclick=function(){
+			var itemElements=document.getElementsByName("items");
+			for(var i=0;i<itemElements.length;++i){
+				itemElements[i].checked=this.checked;
+			}
+		}
+	}
+</script>
+</html>

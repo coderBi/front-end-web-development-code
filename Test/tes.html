@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+		p.class1 {
+			color:red;
+		}
+		.class-div1 {
+			background-color: red;
+			width: 200px;
+			height: 200px;
+			padding: 20px;
+		}
+		.class-div2 {
+			background-color: blue;
+			width: 100px;
+			height: 100px;
+			margin: auto;
+			margin-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<p>这是一个段落，<span class=class1>这是段落中间的span</span></p>
+	
+	<!-- p.class1设置的是拥有class1的P标签 -->
+	<p class=class1>这是一个段落，<span>这是段落中间的span</span></p>
+
+	<!-- 容器内部的子容器的margin是相对于父容器内容边界而言，所以如果父容器padding不为0是不会出现子容器的margin与父容器的padding重合的 -->
+	<div class="class-div1">
+		<div class="class-div2"></div>
+	</div>
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link" href="#">链接文本</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">链接文本</a>
+		</li>
+	</ul>
+	<ul class="nav">
+		<li class="nav-item">
+			<a class="nav-link" href="#">链接文本</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">链接文本</a>
+		</li>
+	</ul>
+	<!-- 外边距合并 -->
+	<div style="background-color:teal; width:300px; height:300px; margin-top:100px; padding:0px">
+		<div style="background-color:red; width:100px; height:100px; margin-top:100px"></div>
+	</div>
+
+	<!-- 测试padding写法 -->
+	<!-- 可以如果只是想设置上面跟左边的padding 那么中间那两项不能设置为auto,需要设置为0
+	 -->
+	<div style="width:300px; heigth:300px; padding: 50px auto auto 50px; background: teal; border: 1px solid green;">
+		<div style="width:100px; height:100px; background:red; display:inline-block;">
+			行内块
+		</div>
+	</div>
+	<div style="width:300px; heigth:300px; padding: 50px 0 0 50px; background: teal; border: 1px solid green;">
+		<div style="width:100px; height:100px; background:red; display:inline-block;">
+			行内块
+		</div>
+	</div>
+</body>
+</html>

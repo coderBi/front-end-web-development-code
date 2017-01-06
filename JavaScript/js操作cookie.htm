@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js操作cookie</title>
+</head>
+<body onload="checkCookie()">
+	<script>
+		function getCookie(name){
+			if(document.cookie.length < 1) return ""
+			c_start=document.cookie.indexOf(name+'=');
+			if(c_start == -1) return ""
+			c_start += name.length + "=".length;
+			c_end=document.cookie.indexOf(";",c_start)
+			if(c_end == -1) c_end = document.cookie.length
+			return unescape(document.cookie.substring(c_start,c_end))
+		}
+
+		/**
+		 * 添加、设置、删除 cookie
+		 * 如果原来没有就是添加，如果有就是更改，如果设置的过期时间在现在时间之前，就是删除
+		 */
+		function addCookie(name,value,expires){
+			var date = new Date()
+			date.setDate(date.getDate() + expires)
+			var expires = date.toGMTString();
+			document.cookie=name + "=" + escape(value) + ";expires" + expires;
+		}
+
+		/**
+		 * 检测cookie是否存在，
+		 * 如果不存在，就添加新的
+		 * 如果存在，就输出欢迎语句
+		 */
+		function checkCookie(){
+			userName=getCookie("userName");
+			if(userName) {
+				alert("welecome" + userName)
+				return;
+			}
+			do {
+				userName = prompt("请输入您的姓名")
+				addCookie('userName',userName,3)
+			} while(!userName);
+			
+		}
+	</script>
+</body>
+</html>

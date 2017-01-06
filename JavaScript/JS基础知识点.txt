@@ -1,0 +1,273 @@
+1,JavaScript与ECMAScript:
+ECMAScript是有微软、borland、netScape等公司参与制作的标准。其中JavaScript、actionScript都遵循这种规范。在这用标准出现之前JavaScript是三足鼎立。
+
+2，javascript存放的位置：如果没有style就放在title下面，如果有style就放在style下面。有时候也可以放在body里面
+
+3，javascript原来叫做livescript，微软拷贝引入了“jscript”，在livescript 2.0的时候改名为javascript
+
+4，JavaScript里面的注释： //  /**/ 
+
+5，对空格换行不敏感，如果一行只有一句那么可以不用“,“隔开。
+
+6，alert语句会阻塞进程，如果是ie浏览器会导致没有点击弹出框的时候没有办法关闭跟点击切换标签页
+
+7，console.log("")，与alert相对比，这个语句是打印到控制台
+----document.write("") 直接写入文档页面。w3c给出解释，只能在html输出流中间使用document.write。如果在文档已经加载完成了再使用，会覆盖整个文档
+
+8，prompt("单出一个输入框")
+
+9，数据类型：
+a）字符串string：既可以用单引号也可以用双引号括起来。存在转义字符，例如\"  \'  \n  \t   \\  \r。字符串拼接用 + ，符串可以跟数值类型拼接
+b) 数值类型Number：整数  小数
+c) boolean类型：可以取值 true false
+d）undefined：如果只有申明，就会使undefined
+f）复杂数据类型：null array object function  String Number Boolean  RegExp  Date。一般情况下简单的数据类型是在栈里面，复杂的数据类型都在堆里面
+
+10，判断数据类型： typeof("abc") = "string"。同时typeof也是操作符，可以直接 typeof "abc"
+
+11，变量：var content=prompt("输入")
+a)申明：var a;
+b)赋值：a=123；
+c）变量命名：英文字母、数字、下划线、$符号。数字不能用作开头
+d）变量类型由内容决定
+e）null，空对象
+
+12，NaN：其本身是number类型。翻译为 not a number，表示不存在这个数字，是一种不正常的数值状态。例如 "abc"-123=NaN。又例如如果a是undefined, a+1=NaN。可以用isNaN()判断是不是一个非数字。例如 isNaN("abc")=ture
+----note: 如果是未定义的a, a+"abc"=undefinedabc
+----note: js里面 NaN != NaN。所有判断是否是NaN也可以看自己是否等于自己
+-----Infinity: 无穷。可以用isFinite()判断是否是“有限的”，例如isFinite(10/0)=false
+
+13，运算优先级：先括号，再乘除取余，再加减
+
+14，Math对象，用作复杂的数据运算
+a）Math.pow(2,10)=1024
+b) Math.round(1.56)=2，四舍五入
+c) Math.ceil(1.1)=2，向上取整
+d) Math.floor(1.9)=1，向下取整
+e) Math.max(1,2,3)=3
+f) Math.min(1,2,3,4,5)=1
+g) Math.random(),生成一个大于0小于1的随机数
+
+15，运算符： + - ++ -- += -=  三元运算  && ||  & |  ！ == > < <= >=  !=  ===  !==
+---  a++  ++a跟其他语言一样
+---  true == 1   false == 0  true !==  1
+
+16，数据类型转换
+a）转成number: Number(要转的字符串或者Boolean)。例如prompt得到的用户输入，类型是string的可以转成number进行数字运算。如果字符串内容包含非数字，返回NaN，如果待转的是空字符串，返回0
+b）另一种转成number（int）：parseInt，区别在于这里都转换成int，会省略掉小数部分。如果字符串第一个字符是数字，parseInt会一直解析到不是数字为止进行返回，而Number在这种情况下会直接返回NaN
+c）parseFloat，转换成float，会保留字符串里面的小数
+e) 转换成string：a=a.toString()  或者 a=String(a); 如果数字不在2~36中间，需要用Number对象: new Number(a).toString(【进制】)，否则经过测试会报错radix错误
+f) 转换成boolean：a=Boolean(a)。例如a=Boolean("true")。除了undefined、0、“”、NaN，其他的转换结果都是true。例如 Boolean("false")=true
+
+17，隐式转换
+a）转number，只需要在字符串前 “+”。例如 a="123"; a=+a;
+b) 数据运算隐式转为number： *  -  / % 
+c) 隐式转换成string： a = a + ""
+d) 隐式转换为boolean： a =!!a
+
+18, 分支结构与循环结构： 略去，跟C类似
+
+19，object类型： var obj = new object(); obj.abs="xxx";
+
+20，数组类型array： var a=new Array(); a[0]="xx";
+a）js里面的数组是无限大的容器
+b）元素可以任意添加，数量跟数据类型没有限制（弱类型）
+c）数组属性：length，可以用来遍历
+d）字符串也可以看做一个数组
+
+21，函数： 
+a）定义：function 函数名(形参列表) {return xx;}。如果函数没有返回，默认的返回值是undefined。
+b）使用： 函数名()
+
+22，js里面每一个基础类型都对应一个复合类型（包装类），例如string对应String，number对应Number
+
+23，定义函数的三种方法：
+a）申明式 function func(){}
+b) 表达式  var a=function(){}; 注意这是一个函数当做表达式赋值，后面有“;”。函数可以用于表达式，例如if(o.func){} 这里func后面没有括号，用作了表达式，会自动转换为boolean类型
+c） new出来： function func(){}  f1=new func();
+-----函数的作用是代码的复用，如果没有函数，多文件合并很容易变量重定义，如果重定义了，第二个会被读成修改值。面向对象内部很多时候是面向过程（函数）的，js是一种基于对象的语言，使用面向对象可以更好的组织跟维护代码。--------
+
+24，js里面除了 while  do while  for  还有 for(var i in o) 相当于foreach
+
+25，new对象。delete删除没有用“var” 申明的变量跟对象属性。js里面方法其实也是属性。
+
+26，构造函数：var Person=function(name){this.name=name;this.talk=function(){};}。构造函数可以解决对象复用的问题，如果是直接量，例如var person={"name":"xx";}，这样 var p2=p1=person，是同一个对象。
+
+27，构造函数相关的prototype： 访问对象的属性，先找的是对象本身的属性，如果没有，会去查找对象相关的__proto__原型对象，也就是构造函数相关的prototype源性属性。每一个prototype只跟相应的构造函数相关，所有new出来的对象会共用这一片内存，所以对于多个对象可以共用的部分，例如函数，可以放到prototype里面, 例如 function func(){name:"xx"}  func.prototype.f1=function(){}; 这样可以减少内存的开销
+
+28，setTimeout() 设置多少秒后执行 1 次。
+	setInterval() 设置每个多少秒执行，知道 clearInterval()
+----note：这两个函数都是先延时，后执行
+
+29, 几个字符串操作
+string = str.replace(string,newstring)
+number=str.indexOf(string) 返回一个字符串出现的首位置，如果没有返回-1
+string = str.slice(startIndex,endIndex)。包括起始位置，不包括end
+match("xx"): 找到返回true 否则返回false
+indexOf
+lastIndexOf()
+eval(string): 如果里面参数不是字符串，直接返回里面的内容，如果是字符串，返回字符串执行结果的值，如果无返回，返回undefined。例如 eval(" var xx = 'a' + 2"),返回a2，同时语句运行完成， xx=‘a2’
+
+30，由于目前所有浏览器默认的脚本语言是js所有script中间的type可以省略，language也可以省略。一般为了不影响页面，js放在head里面或者是页面的底部（紧贴“/body”）。外部引入js: <script src="xx.js"></script>。注意外部的js文件里面不能包含<script>标签
+
+31，js文本折行： document.write("hello \
+				 world");
+
+32, js中with: 可以更方便的调用已有属性，但是不能添加新的属性。例如 var p=new Person(); with(p){name="xx"; age=1} 这里的name age是必须存在的属性
+
+-----js里面
+	undefined != false
+	undefined == null
+	null != false
+---if() 里面null undefined false 都是逻辑不成立
+
+33, 改变元素的属性，可以用setAttribute()，也可以直接 元素.attribute = new value
+----如果要改变html元素的样式，可以使用 document.getElementById("id").style.property=new style。例如：document.getElementById("id").style.color="blue"。又如 document.getElementById("id").style.visibility="hidden" (或者"visible")
+
+34, 常见的dom事件：
+ondblclick
+onchange
+onload: 进入加载完成
+onunload(): 离开页面的时候。 
+----------onload 和 onunload可以用于处理cookie
+---例如 <body onload="return navigator.cookieEnabled ? alert('已经启用cookie') : alert("未启用cookie")"
+
+onmouseover
+onmouseout()： 二者一般要配合使用，出现了onmouseover事件，一般需要onmouseout进行复位
+
+onmousedown: 鼠标按下
+onmouseup： 鼠标抬起
+onclick: 鼠标按下再抬起完成一次点击之后触发
+---一般将onmousedown 跟onmouseup 一起使用
+
+onfocus: 获取焦点时
+onblur: 失去焦点
+
+----dom一级事件取消： node.onclick=null;
+----dom二级事件取消： node.removeEventListener(类型，(有名)处理，事件流)  /  node.detachEvent(类型，（有名）处理) （ie浏览器）
+
+35：js对象: 带属性跟方法的特殊数据类型。js提供多个内建对象，例如String Date Array Math等
+----js里面一旦有了对象构造器就可以创建对象。例如 new function Person(){}
+----js是面向对象的语言，但是js里面不会创建类。js是基于prototype，而不是基于类的。
+----for(对象中的变量){}: for...in中代码针对每一个属性执行一次
+
+36，js中 String对象
+计算长度: str.length
+添加样式：
+str.big()
+str.small()
+str.bold()
+str.italics(): 倾斜
+str.blink(): ie不支持
+str.fixed()
+str.strike(): 删除线
+str.fontcolor("red")
+str.fontsize(14)
+str.toLowerCase()
+str.toUpperCase()
+str.sub()
+str.sup()
+str.link("htttp://www.xx.com")
+
+indexOf(): 首次出现某个字符串位置,没有返回-1
+replace(oldstring,newstring)
+
+37，Date对象
+Date(): 获取当前日期
+getTime()： 返回从1970、1、1至今的毫秒数: new Date().getTime()
+setFullYear(年，月，日): new Date().setFullYear(1992,10,1)，注意月份的设置是0~11
+toUTCString(): 根据UTC转换为字符串 UTC是世界统一时间。例如date返回的是东八区时间，转换成utc会少8个小时
+getDay(): 返回星期的索引 0~6 对应星期日到星期6 
+getHours()
+getMinutes()
+getSeconds()
+setDate(new Date().getDate()+1)： 如果会导致月份进位会自动完成
+
+38，Array对象: 使用单独的变量名来存储一系列的值。
+创建： 可以直接量 var arr=[1,2,3]; 也可以 var arr =new Array() arr[0] = "xx"
+合并数组: arr1.concat(arr2)
+用数组的元素组成字符串： arr.join(".")。join的默认参数是","。也就是默认是用逗号连接的
+
+排序： arr.sort()
+-----------document.write(arr)：会打印arr.join()的内容
+
+39，Boolean对象
+js里面如果逻辑对象无初始值或者值为 0 -0 null "" false undefined NaN。那么对象的值都是false
+
+40，RegExp对象
+创建： new RegExp("模式")
+test():检索字符串中指定的值，返回true或false: var patt1=new RegExp("e"); document.write(patt1.test("the hah")); //将输出true
+
+exex("待检测字符串" 【,'g'】): 如果有参数 “g”会返回所有找到的字符串，否则返回第一个找到的。
+
+compile("模式" [，“g‘])： 用于修改现有的模式
+
+
+
+41，BOM：尚无标准，几乎所有浏览器都实现了与js交互的相同的方法跟属性
+----window对象：表示浏览器窗口，所有的js全局对象、函数、变量都会自动的称为window对象的成员。全局变量是window对象的属性，全局函数是window对象的方法。HMTL DOM 的document也是 window的对象属性之一。例如： window.document.getElementById
+-----window的尺寸； 
+对于ie9以及以后、其他浏览器:
+	window.innerHeight
+	window.innerWidth
+对于ie8 以及之前的ie
+document.documentElement.clientHeight 或者 document.body.clientHeight
+document.doucmentElement.clientWidth  或者  document.body.clientWidth
+---------多浏览器兼容 var w=window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+
+-------其他window方法： open close moveTo resizeTo()
+
+-----window.screen:
+screen.alailWidth  screen.availHeight； 分别表示可用的宽高。不可用的有例如任务栏
+
+-----window.location
+location.hostname: 返回web主机的域名
+location.pathname: 返回当前页面的路径和文件名
+locatoon.port: 返回web主机的端口
+location.protocol: 返回所使用的web协议
+location.herf: 返回当前页面的url
+
+-----window.location.assign("url"): 加载新的文档，当前文档将被覆盖
+
+-----window.history： 访问历史
+history.back()
+history.forward()
+
+-----window.navigator
+navigator.appCodeName：开发者
+navigator.appName: 浏览器名称，例如netscape
+navigator.appVersion
+navigator.cookieEnabled: coolie是否可用
+navigator.platform: 浏览器所在平台，例如 window32
+navigator.userAgent: 得到请求头里面的userAgent
+navigator.systemLanguage
+-----note: 由于navigator对象的数据可以被浏览器使用者更改，所有用它来检测是那种浏览器可能存在误导性，一般可以使用一种浏览器特有的属性进行嗅探，例如Opera 支持window.opera
+
+42, 弹出窗口： alert prompt("提示文本" [,"默认文本"]) confirm()
+
+43，计时器；
+setTimeout: 例如 setTimeout("document.getElementById('id').value='2秒'",2000)
+clearTimeout(t): 取消setTimeout
+setInterval
+clearInterval
+
+
+43, js里面的escape unescape  encodeURI decodeURI  encodeURIComponent  decodeURIComponent
+-------escape 方法不能够用来对统一资源标示码   (URI)  进行编码。对其编码应使用   encodeURI   和encodeURIComponent   方法
+
+------escape 编码是将字符串里面的空格、标点、重音符号以及其他非ASCII字符用%xx 编码代替，其中xx等于该字符的十六进制数。如果字符值大于255，以%uxxxx 表示，也就是用Unicode编码值表示
+
+44，js操作cookie
+添加cookie：document.cookie='name=xxx;expires=new Date().setDate(new Date().getDate() + 3) (或者是Date.setTime() + 3*3600)'
+删除： 将过期时间变成当前时间之前就行
+获取： var c_start=document.cookie.indexOf("name=")
+		if(c_start == -1)  return "";
+		c_start += new "name".length + 1;
+		c_end = document.cookie.indexOf(";",c_start) == -1 ?  document.cookie.length : document.cookie.indexOf(";",c_start);
+		return unescape(document.cookie.substring(c_start,c_end));
+
+*****************
+js里面整数最多15位（经过测试，已经可以显示远远超过17位），小数位最多有17位，但是计算可能不准确
+******************
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>display css属性</title>
+	<style>
+		div {
+			background-color: silver;
+			display:inline;/*将块级标签变为行内标签*/
+		}
+		strong {
+			display:block;/*变为块级标签*/
+			background-color: yellow;
+		}
+		em {
+			display:none;/*让浏览器不显示并且移除这个标签*/
+		}
+		del {
+			display: block;
+			visibility: hidden;/*跟上面的display为none不同，这里虽然不显示，但是浏览器相应的部分会变成空白显示*/
+		}
+
+		/*行内块 跟 块级元素可以设置宽高， 而行内元素不能设置宽高。只有块级元素有上下间距，其他的只有左右边距*/
+		.demo-inline {
+			height:200px;
+			background-color: silver;
+			display:inline-block;
+			/*font-family可以设置多个字体，浏览器会从左向右进行匹配*/
+			/*这里中文字体名字可以先用escape（）方法转换为utf-8编码，再进行赋值，以满足更多的兼容性*/
+			/*serif：衬线体  sans-serif:非衬线体*/
+			font-family:"宋体","Lucida Console",sans-serif;/*设置字体的时候最好把值加上,在末尾的地方加上sans-serif这样如果前面所有的字体都没有找到就会到系统中找一个非衬线体的字体*/
+		}
+		span {
+			/*font-weight 取值100~900 normal:400 bold:700;*/
+			font-weight: 700;
+			/*font-style: italic;使用文字本身的斜体样式*/
+			font-style: oblique; /*浏览器经过计算，让字体进行一定程度的倾斜*/
+		}
+		/*font字体合写，必须保留font-size 跟font-family 否则font属性不起作用*/
+		p {
+			/*font：字体样式 字体是否加粗  字体大小 字体类型*/
+
+			font:oblique 700 20px "微软雅黑";
+
+			/*设置字符之间间距 可以设为默认的normal*/
+			letter-spacing: 10px;
+
+			/*设置英文单词之间距离 只对连在一起的英文单词有影响 对中文没影响
+			*/
+			/*其实只要字符之间有空格 都会被认为是一个单词，也就是中文字符之间如果有空格也可以被认为是一个单词*/
+			word-spacing: 20px;
+		}
+	</style>
+</head>
+<body>
+	<span>span文本</span>
+	<strong>strong文本</strong>
+	<em>em修饰文本</em>
+	<del>del修饰文本</del>
+	
+	<span>span文本</span>
+	<div>
+		div文本
+	</div>
+
+	<div class="demo-inline">
+		 div变为行内块标签
+	</div>
+	<span style="display:block;">span文本</span>
+</body>
+</html>

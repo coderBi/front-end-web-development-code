@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 捕获 冒泡 </title>
+	<script>
+		window.onload = function(){
+			/**其实dom0 所有的都是冒泡的**/
+			document.getElementsByTagName('div')[0].onclick = function(event){
+				alert(this.nodeName + '  ' + event.eventPhase +'' + event.type);
+			};
+			document.getElementsByTagName('p')[0].onclick = function(event){
+				alert(this.nodeName + '  ' + event.eventPhase +'' + event.type);
+				event.stopPropagation(); //阻止冒泡，这样上面的div就不会再被触发
+			};
+			document.getElementsByTagName('span')[0].onclick = function(event){
+				alert(this.nodeName + '  ' + event.eventPhase +'' + event.type);
+			};
+
+			//dom2 跟dom0相比  可以添加多个事件
+			var div1 = document.getElementsByTagName('div')[0];
+			div1.addEventListener('click',function(event){
+				alert('addEventListener  ture: ' + this.nodeName + '  ' + event.eventPhase +'' + event.type);
+			},true);
+			div1.addEventListener('click',function(event){
+				alert('addEventListener  ture once: 另一个事件');
+			},true);
+			div1.addEventListener('click',function(event){
+				alert('addEventListener  false: ' + this.nodeName + '  ' + event.eventPhase +'' + event.type);
+			},false);
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<p><span>点我</span></p>
+	</div>
+</body>
+</html>

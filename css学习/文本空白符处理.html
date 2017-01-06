@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>空白文本处理</title>
+	<style>
+		div {
+			background-color: green;
+			width: 200px;
+			height: 200px;
+			border: 1px solid red;
+		}
+		/*不被包裹，意味着文字不被相应的div包裹，会超出去显示*/
+		.nowrap {
+			white-space: nowrap;
+		}
+		/*预处理，文字在编辑的时候是怎么样的浏览器就怎么显示，不去管是否超出了div编辑*/
+		.pre {
+			white-space: pre;
+		}
+		/*正常处理，文字超出div边框时候回自动进行换行*/
+		.nomal {
+			white-space: normal;
+		}
+	</style>
+</head>
+<body>
+	<div class="normal">
+		normal:www.baidu.com;
+			   www.baidu.com/ajfjasfjlasjfasjfl;
+	</div>
+	<div class="nowrap">
+		nowrap:www.baidu.com;
+			   www.baidu.com/ajfjasfjlasjfasjfl;
+	</div>
+	<div class="pre">
+		pre:www.baidu.com;
+			www.baidu.com/ajfjasfjlasjfasjfl;
+	</div>
+</body>
+</html>

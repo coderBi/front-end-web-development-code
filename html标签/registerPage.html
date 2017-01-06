@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>注册页面</title>
+</head>
+<body>
+	<h1>账号注册</h1>
+	<hr>
+	
+	<form action="#">
+		<table>
+			<tbody>
+				<tr>
+					<td>昵称</td>
+					<td>
+						<input type="text" name="name">
+					</td>
+				</tr>
+				<tr>
+					<td>密码</td>
+					<td>
+						<input type="password" name="password">
+					</td>
+				</tr>
+				<tr>
+					<td>确认密码</td>
+					<td>
+						<input type="password">
+					</td>
+				</tr>
+				<tr>
+					<td>性别</td>
+					<td>
+						<!-- 用文字将文字”男“ 跟”女“括起来，将label的for属性指向前面的id -->
+						<input type="radio" checked="checked" name="gender" id="gender-man" value="1"><label for="gender-man">男</label>
+						&nbsp;
+						<!-- 直接用label把input标签跟后面的文字都包起来，效果跟上面的设置label的for属性是一样的 -->
+						<label><input type="radio" name="gender" id="gender-woman" value="2">女</label>
+					</td>
+				</tr>
+				<tr>
+					<td>生日</td>
+					<td>
+						<select name="birthday-li" id="">
+							<option selected="true">公历</option>
+							<option>农历</option>
+						</select>
+						<select name="birthday-year" id="">
+							<!-- option{199$年}*9 -->
+							<option value="">1991年</option>
+							<option value="">1992年</option>
+							<option value="">1993年</option>
+							<option value="">1994年</option>
+							<option value="">1995年</option>
+							<option value="">1996年</option>
+							<option value="">1997年</option>
+							<option value="">1998年</option>
+							<option value="">1999年</option>
+						</select>
+						<select name="birthday-month" id="">
+							<option>月</option>
+						</select>
+						<select name="birthday-day" id="">
+							<option>日</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>所在地</td>
+					<td>
+						<select name="address-county" id="">
+							<option value="1" selected="true">
+								阿富汗
+							</option>
+						</select>
+						<select name="address-provence" id="">
+							<option value="1" selected="true">
+								
+							</option>
+						</select>
+						<select name="address-xian" id="">
+							<option value="1" selected="true">
+								郝特拉
+							</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>验证码</td>
+					<td><input type="text" name="Yanzhengma"></td>
+				</tr>
+				<tr>
+					<td>手机号</td>
+					<td><input type="text" name="telphone"></td>
+				</tr>
+				<tr>
+					<td rowspan="3"></td>
+					<td><input type="checkbox" name="OpenSpace" checked>同时开通空间</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="Agreement" checked>我已经阅读并统一相关条款与隐私政策</td>
+				</tr>
+				<tr>
+					<!-- submit value表示按钮显示的字 也是提交的值（如果给了name属性） -->
+					<td><input type="submit" name="submitBtn" value="提交注册"></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	
+	
+</body>
+</html>

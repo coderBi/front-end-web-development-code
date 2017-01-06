@@ -1,0 +1,252 @@
+﻿1, js设计相关：
+--dom操作： document.getElementById()
+---事件操作：
+dom 2级事件操作： 主流浏览器： addEventListener() removeEventListener()
+					  ie: attachEvent( )  detachEvent()
+----事件对象：
+主流浏览器: 事件处理函数的第一个形参 div.onclick=function(evt)
+ie: window.event
+
+----事件对象组织事件流产生：
+主流： evt.stopPropagation()
+ie:  evt.cancelBubble = true;
+-----事件对象阻止浏览器默认动作
+主流： evt.preventDefault()
+ie: evt.returnValue = false;
+-----ajax使用：创建/onreadystatechange/open/send
+*************jquery对上面的js相关操作进行了封装，基本不需要考虑浏览器的兼容性问题*******
+
+2，jquery特点：
+---语法简单
+---轻量级脚本，代码小巧
+---支持css1~3
+----跨浏览器，支持ie6+ 跟主流浏览器
+----能够将js操作与html完全分离
+
+3，jQuery：是Prototype之后又一个优秀的js框架。目前jquery 2.0之后对ie6 7 8 支持不好。
+jquery： js query，前期侧重页面节点的快速查找，后期丰富了事件操作 ajax操作 动画效果 dom操作等
+---其他框架，例如 Extjs可以实现非常炫酷的效果，例如页面拖拽
+
+4，jquery基本选择器: 来源于css选择器
+$("#xx")
+$('div')
+$('.classname')
+$('*')
+$('s1,s2')：联合选择器
+
+5，层次选择器
+$(s1 s2): 派生（后代）选择器
+$(s1 > s2)：子代选择器
+$(s1 + s2): 后续紧邻兄弟选择器，s2跟s1是兄弟关系,并且s2在s1后面紧跟着s1
+$(s1 ~ s2):后续兄弟选择器，会匹配到s1后面的所有的兄弟节点
+
+6, 并且（过滤）先择器
+$('s:first'): 符合s 并且是第一个
+$('s:last'): 符合s 并且是最后一个
+$('s:eq(3)'): 符合s 并且找到的节点索引值等于 3。
+$('s:gt(3)')
+$('s:lt(3)')
+$('s:even'): 下标是偶数
+$('s:odd')： 下标是奇数
+$('s1:not(s2)'): 匹配到s1 并且不符合s2。例如 $('.name:not(#username)')
+---------并且选择器本身是可以单独使用的，例如$(':header')：会匹配到所有的h标签
+-----各种选择器都可以构成并且选择器： $('div.classname'): 获得div并且class有限制
+-----每个选择器使用之前，前面匹配的下标已经重新归位。也就是前面得到的对象集合下标是 0~n，接下来操作的下标是这 0~n。而不是之前页面上原来的对应脚标
+-----多个并且关系的选择器没有前后顺序的要求，但是有些写法没有办法颠倒顺序，例如：$(div.class) 顺序尽管无关，但是没有办法写成 $(.classdiv)
+
+7, 内容过滤选择器
+:contains(内容)：指定节点内部必须包含指定的内容。查找这些内容的时候，里面有标签无影响
+:empty ：内部没有任何元素，包括元素节点，文本。
+：has(s选择器) : 这个选择器得到的集合下面必须还有s选择器匹配。例如 $('div:has(#divchild)')。 has后面匹配属于后代范畴，不止包含子代
+：parent ：必须是父节点，也就是找到的必须有孩子节点
+
+8, 表单域选中
+--对于单选、复选：$(':checked')
+--对于下拉： $(':selected')
+
+9, 属性操作
+$().attr(属性名称)：获得属性值
+$().attr(属性名，值): 设置属性值
+$().removeAttr(属性名): 删除属性
+$().attr(json对象)： 同时为多个属性设置
+$().attr(属性名，fn)： 通过fn执行的return值对属性进行赋值
+-----对于type属性，jquery不允许。但是底层的js操作,例如 getElementById('xx').type='checkbox'。在有的浏览器是可以操作的。
+-----input除了type属性，其他的都可以删
+
+----jquery 1.6以后将checked selectedIndex这样的叫做特性，不用attr操作，用prop操作。一旦页面加载完成，用attr获取他们的值是不变的。
+
+10, jquery提供的快捷属性操作
+-----$().addClass('xx'): 添加class 。多个addClass是追加的效果。但是如果用 $().attr('class','xx')多个语句会实现覆盖，需要$().attr('class',$().attr('class'）+ ' xx')
+-----$().removeClass('xx'): 删除某一个值，不会删除这个属性。
+----$().toggleClass('xx'): 开关效果，如果没有这个值就进行添加，否则进行删除
+
+11, .html()
+--$().html(): 获取标签里面包含的内容，获取html标签内容跟普通字符串内容
+--$().html('xx'): 设置标签里面包含的内容,会将<> 标签解析为子元素
+--$().html('xx'): 设置标签里面包含的内容。例如 $().html('内容：<a>xx</a>')
+--$().text(): 自会获取普通字符串文本，但是会忽略标签信息。例如 “<input>xxx” 会只得到 xxx
+--$().text('xx'): 设置标签里面包含的内容,如果xx包含了标签信息，会自动将 <> 转为实体符号加到内容里面。例如 ’<input>xxx‘设置进去不会添加一个input标签
+
+12，css样式操作
+$().css(name,value)：设置一个
+$().css(name)： 得到一个项的值
+$().css(json对象)： 设置多个的值
+------jquery可以获得所有的样式设置，而原来的dom操作只能得到行内的样式信息
+-------如果是“复合样式”例如像border这样的，不能直接给css（）传递这个属性，否则得到的是空字符串，需要对各个部分分别进行获取
+------设置样式的时候，都是设置为行内样式，如果没有就进行添加
+------复合样式，可以直接进行设置： $().css('border','1px solid white')
+
+13, 属性快捷操作
+----attr操作： $().attr('value' [',设置值'])
+-----快捷操作 $().val() 获取
+			  $().val(["要设置的值1",……])
+------note：如果获得jquery对象里面有多个节点，用$()[i] 得到的是节点对象，不是jquery对象，没有val()等jquery操作方法
+-----val（）方法主要是对复选框、下拉框的操作更便捷，$('.checkbox').val([1,2.3]): 就可以设置值为 1,2 3的被选中。不需进行遍历获取值再设置。$('select').val()得到的值是一个数组，如果是多选的就得到多个值。$('select').val([1]) 快捷下拉框的值
+----用val设置value，如果判断得到多个节点，里面只能接受数组 []
+
+
+
+***************************
+jquery 1.6以后将属性跟特性做了区分，页面一旦加载完成，再去用attr去获取这些特性的值是不会改变的。如checked特性在1.6以前是返回true false，但是1.6之后如果初始化页面没有就返回undefined，如果有（checked）就返回checked。以后不会随着页面点击而改变。如果要获取他们，可以用$().prop('checked')。 相应的设置也是一样。
+常用的属性，例如id name。常用的特性例如 tagname nodename checked selectedIndex
+***************************
+
+
+14，$符号： 在jquery文件内部，可以返现 window.jquery = window.$ = jquery函数
+
+15，jquery 对js dom的封装：
+dom对象最后变成jquery对象的数组组成部分：例如 $('#') 内部实现存在： this.length = 1; this[0] = getElementById('xx')
+-----jquery: this[0~n] 就是dom对象
+-----dom 对象可以直接传递给$: dom对象选择器， $(dom对象).css('xx') 这样就可以通过dom对象操作jquery方法了。内部实现代码： if(selector.nodeType){this[0] = dom对象； this.length = 1;}
+
+16, jquery框架对象包括： jquery对象（普通对象） $对象（函数对象 $.get()）
+---jquery对象：通过各种选择器得到，可以调用 css() attr  addClass html()等。 jquery.fn.init 的prototype是fn，jquery.fn.extend继承丰富了很多方法。$() 操作的大部分方法都是这部分丰富的里面的
+
+17，jquery each遍历：
+----$.each(数组，function(k,v){})
+----$.each(dom对象，function(k,v){}) 
+----$().each(function(k,v)): k代表每一个dom对象的下标 0~n  v代表每一个dom对象
+-----在jquery内部是用this代表的是dom对象：$().each(function(k,v){ this.style.color='green';  $(this).css('color','black'); }) 
+
+18,jquery 加载事件
+--.ready(fuction处理): 
+----$(document).ready(function): $(document)把document对象变成jquery对象
+----$().ready(function): $()创建的jquery对象内部没有dom对象
+----$(function处理): 是对第一种加载事件的封装
+----note: 传统的js设置，只能设置一个加载onload事件，而jquery里面多个加载事件都会执行。原因是传统的onload事件是对变量进行赋值，所以多个赋值会进行覆盖。而jquery加载是将每个加载事件存放到一个数组里面，执行的时候，遍历执行这个数组。
+-----note：传统的加载事件，是要将全部的内容都加载完成（需要显示完全），才执行加载事件。而jquery加载事件，只要全部内容（文字、图片、样式）在内存里面绘制完毕（这个时候浏览器可能还没显示相关内容）就进行。很明显利用jquery加载，一旦一个节点完全显示出来相关事件就肯定可以点击。而js onload需要所有的都显示出来，才可以点击这个节点的事件
+
+19, jquery 事件操作
+---$().事件类型(事件处理函数fn)： 设置事件，事件类型可以是：click keyup kedown mouseover museout blur focus change dblclick submit等。
+---$().事件类型（）：里面没有参数，是触发事件。例如例如 $(form).submit()
+----可以为一个类型设置多个处理函数
+
+20, jquery对文档操作
+
+追加:  包括父子追加  兄弟追加
+父子追加：
+---append(content): 后置追加，例如 $('div').append('<br>') 这是追加新节点   $('div').append($('p')) 这是追加新节点
+---prepend(content): 前置追加
+----appendTo(content): 把所有匹配的元素后置追加到另一个指定的元素集合中。 例如 $('<li>xx</li>').appendTo($('div'))
+----prependTo(content): 把所有匹配的元素前置追加到另一个指定的元素集合中
+----note：已有节点追加跟之前的dom一样，会出现节点的转移情况
+兄弟追加：
+----before(): 追加到前面
+----after(): 追加到后面
+-----insertBefore(): 被动追加到前面
+-----insertAfter(): 被动追加到后面
+
+替换： 新节点替换  已有节点去替换
+----$().replaceWith(): 被动替换，自己被替换
+----$().replaceAll(): 主动替换，自己去替换匹配的节点
+----note: 如果用来替换的节点是已经有的，会发生节点的转移
+
+删除：
+---$(父节点).empty(): 清空内部子节点
+----$().remove(): 删除匹配到的节点，例如 $('#xx').remove() 就是删除id是xx的节点
+
+复制：
+----$().clone(true): 节点及内部节点都会被复制，而且还会复制得到事件
+----$().clone(false)：区别在于不会复制得到事件
+-----note: 无论参数是false还是true  都会复制节点及其内容 
+-----note: js cloneNode（）无论是true 还是false，都不会复制事件
+
+21, 属性选择器：
+$('[xx]'): 节点必须要有xx属性。例如$('[name]')
+$('[xx=value]'): 节点必须要有xx属性，并且它的值是value。例如$('[name=xx]')
+$('[xx!=value]'): 节点如果有xx属性，它的值不能是value。否则节点没有xx属性
+
+----note：实现有一个属性，并且这个属性值不等于一个value: $('[xx][xx!=value]')。例如 $('[class][class!=class1]')
+
+$('[name^=value]'): 必须要有name属性，并且name的值必须是以value开始的。例如 $('[value^=to]')
+$('[name$=value]'): 必须要有name属性，并且name的值必须是以value结尾。例如 $('[value$=per]')
+$('[name*=value]'): 必须要有name属性，并且name的值包含xx。
+
+22, jquery 事件绑定
+--$().bind(事件类型,function)
+--$().bind(事件类型1 类型2 类型3,function): 给几种类型一个方法。
+--------note： 多个类型之间通过一个空格连接。 如果有多与一个空格，会导致只有第一个类型有作用--------
+--$().bind(json对象)： 同时对多个不同类型的事件进行设置。例如 $('div').bind(click:function(){},mouseover:function(){})
+
+取消事件绑定
+----js dom:  一级 onlick=null  二级 node.removeEventListener(类型，（有名）处理，事件流)
+----jquery取消：
+$().unbind() //取消全部的事件
+$().unbind(事件类型)： 取消指定类型的全部事件
+$().unbind(事件类型，有名事件处理函数): 取消指定类型的指定函数
+------note： 取消指定的函数，这个函数必须是有名的。
+
+23, 事件对象、阻止浏览器默认动作、阻止事件冒泡
+----dom2级： 
+阻止默认动作： ie 事件对象.returnValue=false  主流 事件对象.preventDefault()
+阻止冒泡阻止： ie 事件对象.cancelBubule=true  主流  事件对象.stopPropagation()
+---$().click(function(evt)): 这里的evt直接使用不用考虑浏览器兼容，因为jquery内部处理过
+----jquery阻止浏览器默认动作、阻止事件冒泡
+evt.preventDefault(): 不用考虑兼容问题
+evt.stopPropagation(): 不用考虑兼容问题。jquery做了兼容处理
+------stopPropagation：不在派发事件，终止事件在传播过程的捕获、目标处理或起泡阶段进一步传播。该节点上处理程序将被调用，但是不再派送到其他节点------
+
+24，jquery 动画效果
+---基本动画: 通过改变宽高、透明度、display控制
+$().show(时间): 显示， 如果时间参数设置了，会有一个渐变隐藏的效果。 参数单位是毫秒
+$().hide(时间): 隐藏， 其实是通过添加css display: none 实现。 如果时间参数设置了，会有一个渐变效果
+$().toggle(): 切换元素的可见状态
+$().toggle(true/false): 如果有参数，是true就会一直显示，是false就会一直隐藏
+$().toggle(speed, [callback]): 以一定速度显示/隐藏
+
+----垂直动画: 通过控制height
+$().slideUp(时间参数)：隐藏
+$().slideDown(时间参数): 显示
+$().slideToggle(时间)
+*******note： 如果让一个动画每隔一段时间执行，如果这个时间值小于动画执行需要时间，也就是说动画还没有执行完成就在上面开始了一个新动画，这种情况下，新动画不会执行，需要等待之前的这个动画执行完成。
+
+----颜色渐变动画: 通过控制style里面的opacity（透明度） 如果opacity为0 display会自动为none
+fadeOut(时间)：变淡
+fadeIn(时间)
+fadeToggle()
+fadeTo(speed,opacity,[callback]): 以指定的速度，调整到指定的透明度。
+*********透明度的调整，不同浏览器有差异，jquery内部实现了兼容*****
+
+25，jquery封装ajax
+---$.get(url [,data] [,function(msg){} 回调函数，也就是完成请求了readystate为4的时候执行] [,dataType])
+data：请求字符串，json对象都行
+function(msg): ajax请求完成之后执行该函数，msg泛指从服务器传递回来的信息。
+dataType: 是服务器返回的数据类型，可以是 html text xml json。如果是xml就用responseXml接受，如果是text就用response.text接受。如果是json就不需要自己去转换。
+---$.post(url...)
+*****note: .get .post 两种ajax请求都是异步的，如果要设置同步请求，需要换其他的方法。
+----$.ajax({
+	//json对象
+	url: 请求地址,
+	[data]: 请求数据可以是字符串 、 json对象,
+	[dataType]: 数据从服务器返回格式，默认是html,
+	[type]: get/post,
+	[success]: function(msg){} 请求成功之后回调,msg泛指从服务器返回来的信息
+	async: true异步 false 同步
+	cache: true缓存 false 不缓存, 
+})
+
+
+***********************************************
+个人使用时小点发现：
+1，通过原生的js语句可以或得到文本框中的输入的值，而通过jQuery的attr不能获取到。应该通过val()得到。
+***********************************************

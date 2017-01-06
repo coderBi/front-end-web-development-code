@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery .html() .text()</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function f1(){
+			console.log($('div').html());  //未修改前打印： Today is a <span>good day</span>!!!
+			console.log($('div').text());   //未修改前打印： Today is a good day!!!  也就是忽略了
+		}
+		function f2(){
+			$('div').html("Tomorrow is a <span>good day</span>!!!");
+		}
+		function f3(){
+			$('div').text("Tomorrow is a <span>good day</span>!!!");
+		}
+	</script>
+</head>
+<body>
+	<div>Today is a <span>good day</span>!!!</div>
+	<input type="button" value="获取" onclick="f1()">
+	<input type="button" value="设置html" onclick="f2()">
+	<input type="button" value="设置text" onclick="f3()">
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试2</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.parent1 {
+			width: 300px;
+			height: 300px;
+			background: teal;
+		}
+		.child1, .child2 {
+			height:100px;
+			width: 100px;
+			background: red;
+			border: 1px solid green;
+			margin-left: 10px;
+		}
+		.child1 {
+			float: left;
+		}
+		.child2 {
+			display: inline-block;
+			display: block;
+		}
+
+		.aside {
+			/*加上了display之后下面的margin-left 会失去效果*/
+			/*display: table;*/
+			/*border: 3px solid #000;*/
+			margin-left: 685px;
+			background: teal;
+		}
+		.aside-most-liked {
+			/*display: table;*/
+			border: 0px solid red;
+			border: 3px solid red;
+			
+			/*使用display： inline-block 防止内容被压缩*/
+			border: 3px solid red;
+			display: inline-block;
+			/*font-size: 10px;*/
+		}
+		body {
+			width: 900px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 测试float -->
+	<div class="parent1">
+		<!-- 第一个div float之后 第二个如果设置为inline-block则在其右边显示，并且margin起作用 -->
+		<div class="child1">child1</div>
+		<div class="child2">child2</div>
+	</div>
+	
+	<!-- 测试border的影响 -->
+	<div style="display:table">
+		<!-- <div style="clear:both"></div> -->
+		<!-- <br> -->
+		<div style="float:left; width:678px; background:green; height:300px; margin-right:10px"></div>
+		<!-- 通过计算：由于最外层的div是display:table的，这里的aside如果不放任何内容
+			一开始应该是空的，可是由于旁边float的div 宽度678 + 外边距 10 = 688
+			这里的688 > aside到左边的距离 685， 因为float出来的div不能再改变aside的
+			位置了，所以其外边距的部分会去挤压aside的内容区，将其内容区向右挤压 688 - 685 = 3的宽度，所以，这里的aside即使什么都没有放，由于挤压效果，也会有基础的 3px宽度 -->
+		<!-- 下面再接着分析为什么aside-most-liked 的border < 3 的时候整个aside会进行下移
+			由于上面的分析float出来的div会挤压aside 3px的内容 aside没有设置边框，那么在向右挤压，首先会挤压到里面aside-most-liked的边框，由于float不会挤压边框，如果边框 < 3 那么float会接着向右挤压到aside-most-liked里面的内容区，而它的内容区放的是个行内块元素img。float不会改变横向排版，所以img会向下一行移动，直到可以放下图片，由于aside-most-liked的高度是自适应的，所以在移动的过程中，float实际会改变其高度. -->
+		<!-- 类似的分析，如果 把这里的 3px的宽度加到外层的 aside上面也是可以规避内容被压缩导致的换行-->
+		<div class="aside">
+				<div class="aside-most-liked">
+					<div>
+						<!-- note： 图片宽度195 -->
+						<a href="#" class="aside-most-liked-link">
+							<img src="aside-most-liked-image.gif" alt="">
+						</a>
+						<!-- ss我不是手机发垃圾来访 -->
+					</div>
+				</div>
+				<div class="aside-most-liked">
+					<div>
+						<!-- note： 图片宽度195 -->
+						<a href="#" class="aside-most-liked-link">
+							<img src="aside-most-liked-image.gif" alt="">
+						</a>
+						ss我不是手机发垃圾来访
+					</div>
+				</div>
+		</div>
+	</div>
+</body>
+</html>

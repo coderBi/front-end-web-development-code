@@ -1,0 +1,106 @@
+<!-- 通过诸多实验的经验：
+1，为了可以有效的控制，如果a标签里面放了图片以外的东西，可以将a标签设置为行内块
+2，如果a中间只是放一个图片，为了不让这张图片留白，可以设置a的font-size为0。或者是设置line-height为0 不同的是line-height为0其实是将同一行文字的基线一下沁入了a的下一行（或者是a的边框）。当然也可以将img设置为block 这样其独占一行，与其同行的所谓的空白文本也就消失了
+3，如果img与文字在一行进行显示，文字是默认基线对齐的，而img没有基线，也就是默认底部进行对齐，这样实际上img与同一行文字的基线对齐 
+4，应该尽量避免将img设置为block放置在a中间，因为，img设置为block其下面的空白并不会消失，尽管a可以触发bfc对img进行包裹，但是img下面的空白会突出a标签 影响到下面其它标签的显示。也就是要消除img小面的空白的影响，不应该将其设置为block，除非将外层的a标签也设置为block的
+5，所有这一切的纠结都在于a标签里面的空白盒子的问题
+6,可以隐约发现一些想象，可能有这样的级别： block > inline-block > inline 如果级别小的包裹级别大的 很有可能会出现一些意想不到的问题
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+	<!-- <img src="图片的地址" alt="图片传送失败会显示" title="鼠标移动到图片上面会显示"> -->
+	<img src="image/老路.png" alt="显示失败" title="老路">
+	<img src="image/老路1.png" alt="显示失败" title="老路">
+	<div>
+		<img src="image/老路1.png" alt="显示失败" title="老路">
+	</div>
+
+	<!-- 用a标签包裹 -->
+	<!-- 关于a标签 里面的img显示 -->
+	<div style="border:3px solid red">
+		<!-- img标签设置为block会独占一行， a标签设置为inline-block会触发其bfc 也就是会完全去包裹里面的img -->
+		<a href="#" style="display:inline-block; border: 5px solid green; font-size:0"><img src="image/老路.png" alt="显示失败" title="老路" style="display:block">
+			<!-- <span></span> -->
+		</a>
+	</div>
+	
+	<div style="border:3px solid red">
+		<!-- img设置为block会独占一行， a设置为block也会独占一行
+		a标签同时会触发bfc也就会对里面的img实现包裹 -->
+		<a href="#" style="display:block; border: 5px solid green"><img src="image/老路.png" alt="显示失败" title="老路" style="display:block">
+			<span></span>
+		</a>
+	</div>
+	
+	<!-- 关于a ：inline-block 里面存放 img：block  要注意这种情况其实是畸形用法，这里只是进行显示情况的分析。正常情况下一般应该规避 -->
+	<div style="border:3px solid red">
+		<!-- img是block的会独占一行,这时的分析可以认为img标签的前后各有一个什么都没有的文本，这两个文本会在img的上下两行分别显示，具体显示的高度跟a标签里面的字体高度跟行距比例有关 -->
+		<a href="#" style="display:inline; border: 5px solid green"><img src="image/老路.png" alt="显示失败" title="老路" style="display:block; border:1px solid #000">
+			<!-- <span></span> -->
+		</a>
+		<br>
+		<!-- 进一步通过效果可以发现即使设置a标签的font-size 跟line-height都是0 图片本身还是会有一定比比例的行距 -->
+		<a href="#" style="display:inline; font-size:0; line-height:0; border: 5px solid green"><img src="image/老路.png" alt="显示失败" title="老路" style="display:block; border:1px solid #000">
+			<!-- <span></span> -->
+		</a>
+	</div>
+
+	<!-- 下面再进一步在上面的例子上通过修改a标签的 font-size 跟 line-height查看效果 -->
+	<div style="border:3px solid red; font-size:30px">
+		<!-- 通过修改了line-height到一个比较大的值，可以发现img上下的确算是有一个文本，准确的说应该是同一个文本被img在中间一行分开了 -->
+		div中间的文本
+		<!-- div中间的文本跟a会有一个对齐方式，默认是基线，所以二者会位于一个水平线 -->
+		<!-- 注：line-height设置为0的时候 并不会不显示文字 如果line-height小于了相应的文字需要的最小空间，文字会用所需的最小空间进行显示 -->
+		<!-- 注2：a标签只是会包裹里面的文本跟默认行距的空间，也就是文本所需盛纳的最小空间，超出部分不会被a包裹，但是会撑开父容器 -->
+		<a href="#" style="display:inline; line-height:0px; border: 5px solid green; font-size:10px">上半部分
+			<!-- 通过测量，img如果是block的其下面会出现一个空行，空行的高度恰好是盛纳一个文字的空间。可以推断img其实原来右边有一个空内容的文本，如果将img设置为block会导致这个文本下移 -->
+			<img src="image/老路.png" alt="显示失败" title="老路" style="display:block; border:1px solid #000">下半部分
+		</a>
+		<br>
+		<!-- 通过与下面的对比，可以发现其实img上面下面多出的都是一个line-height -->
+		<a href="#" style="display:inline; border: 5px solid green; font-size:10px"><!-- <img src="image/老路.png" alt="显示失败" title="老路" style="display:block; border:1px solid #000"> -->
+			<!-- <span></span> -->
+			<span>阿卡减肥啦</span>
+		</a>
+	</div>
+
+	<div style="border:3px solid red">
+		<!-- 如果a标签是内部块 img也是默认的内部块，这个时候，a标签触发其bfc会对img进行包裹，通过观察可以发现，img的下面会多出一行空白，经过调查与分析，可以认为img的右边有一个空白块，其基线与img的底部进行了对齐，其高度就是一个文字的容纳空间。如果将a标签的font-size 设置为0这个空行会消失，如果将其line-height设置为0 空行也会消失a中的与img同一行的文本会出现基线一下落入了a的border里面-->
+		<a href="#" style="display:inline-block; border: 5px solid green; vertical-align:middle;line-height:0"><img src="image/老路.png" alt="显示失败" title="老路">pp
+			<!-- <span></span> -->
+		</a>
+	</div>
+
+	<!-- a标签默认是inline的  img默认是inline-block的 这种情况与默认显示是一样的 -->
+	<div style="border:3px solid red">
+		<a href="#" style="display:inline; border: 5px solid green; vertical-align:middle"><img src="image/老路.png" alt="显示失败" title="老路">
+			<!-- <span></span> -->
+		</a>
+	</div>
+
+	<!-- 默认显示 -->
+	<div style="border:3px solid red">
+		<!-- a标签默认是inline的所以其大小默认是与a标签里面的文本大小有关，图片放入其中会超出其显示范围，但是a标签里面的img会正常显示在其父容器里面。同时由于“空文本的”影响会出现img下面多出一部分 -->
+		<a href="#" style="border: 5px solid green; vertical-align:middle"><img src="image/老路.png" alt="显示失败" title="老路">
+		</a>
+	</div>
+
+	<!-- 下面将a标签的overflow设置为hidden -->
+	<div style="border:3px solid red">
+		<!-- 可以发现a标签的overflow:hidden 并不能将溢出去的图片部分进行隐藏 -->
+		<a href="#" style="overflow:hidden; border: 5px solid green; vertical-align:middle"><img src="image/老路.png" alt="显示失败" title="老路">
+		</a>
+	</div>
+</body>
+</html>

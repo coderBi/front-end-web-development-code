@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>宽按钮文本</title>
+	<style>
+		* {
+			/*设置默认内间距外间距*/
+			padding:0px;
+			margin: 0px;
+		}
+		p {
+			/*设置首行缩进，只能设置块级标签，不能设置行内标签*/
+			text-indent: 2em;
+			/*text-indent: 可以设置为负数，例如可以用于隐藏标题文字显示同时便于网站seo*/
+		}
+		a {
+			background-color: silver;
+			/*font-size: 20px;
+			font-weight: 700;
+			font-family: "黑体";*/
+			font: 700 20px "黑体";
+			/*也可以在这里设置行高*/
+			font: 700 20px/1.5em "黑体";
+
+			/*a是行内标签 为了可以设置宽高*/
+			display: block;
+			width:200px;
+			height: 50px;
+
+			/*设置行高，让其居中*/
+			line-height: 50px;
+			/*设置水平居中，默认是向左对齐的*/
+			text-align: center;
+			/*取消下划线*/
+			/*text-decoration: underline overline line-through;*/
+			text-decoration: none;
+			/*设置字符间距*/
+			/*letter-spacing: 30px;*/
+			word-spacing: 30px;
+		}
+	</style>
+</head>
+<body>
+	<a href="#">按 钮</a>
+	
+</body>
+</html>

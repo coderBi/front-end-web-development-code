@@ -1,0 +1,121 @@
+<!-- 1，一个html页面可以认为是由很多个盒子组成
+2，盒模型应该尽量保证头部是DOCTYPE html 否则可能会显示有问题，因为可能解析的时候不是按标准盒模型解析 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>盒模型</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		div {
+			width: 200px;
+			height: 200px;
+		}
+		.box {
+			width: 200px;
+			height: 200px;
+			/*设置的背景色也会影响到内边距*/
+			background-color: #ccc;
+			padding: 10px;
+			/*设置的背景色也会影响到边框，这里的点线边框的空白地方就是变成背景色*/
+			/*ie6存在背景不能影响边框问题*/
+			border: 10px dotted red;
+		}
+		.box1 {
+			height: 200px;
+			width: 200px;
+			background-color: green;
+			/*设置上边框的宽度*/
+			border-top-width: 10px;
+			/*设置上边框的颜色*/
+			border-top-color: red;
+			/*设置上边框样式,边框的style默认是none*/
+			border-top-style: solid;/*样式有实线点线等，这里如果没有设置边框的style会出现不显示边框*/
+
+			/*设置下边框  合写： 宽度 样式 颜色*/
+			border-bottom: 5px solid blue;
+			border-left: 5px solid yellow;
+			border-right: 5px solid yellow;
+
+			/*也可以用一行设置上下左右所有的边框样式
+			border: 10px dashed blue*/;
+
+			/*去掉边框最好的兼容性写法*/
+			/*border: 0 none;*/
+		}
+		.box2 {
+			/*设置容器内容宽高都为0*/
+			width: 0px;
+			height: 0px;
+			/*设置默认边框颜色透明*/
+			border: 100px solid transparent;
+			/*设置上边框颜色*/
+			border-top-color: green;
+			/*去掉下边框*/
+			border-bottom: 0 none;
+			/*设置背景色，会影响到边框*/
+			background-color: white;
+		}
+		.box3 {
+			width: 200px;
+			height: 200px;
+			/*padding合写：上 右 下 左 顺序*/
+			padding: 20px 5px 10px 5px;
+			/*note：内边距会被背景色影响*/
+			background-color: green;
+		}
+		.box4,.box4 strong{
+			/*对于行内元素margin-bottom margin-top 设置没有效果*/
+			margin-top: 100px;
+			margin-bottom: 100px;
+			/*对于行内元素margin左右有作用*/
+			margin-right: 20px;
+			margin-left: 5px;
+
+			/*padding同margin一样只有水平方向起作用*/
+			padding: 20px;
+			border: 1px solid red;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="box">
+		
+	</div>
+
+	<!-- 可以分别设置上下左右border -->
+	<div class="box1">
+	
+	<!-- 利用border绘制三角形 -->
+	</div>
+	<div class="box2"></div>
+	<!-- 设置padding -->
+	<div class="box3">
+		i am a boy and she is a girl.that's good.
+	</div>
+
+	<!-- 行内元素设置 -->
+	<div>
+		<span class="box4">
+			<strong>这里是</strong>span内容
+		</span>
+		<span class="box4">span内容</span>
+		<span class="box4">span内容</span>
+	</div>
+	
+	<!-- 多个盒子相接，外边距取二者之间的较大者，称之为外边距的合并 -->
+	<div style="margin-bottom: 10px; background-color:green"></div>
+	<div style="margin-top: 30px; background-color:green"></div>
+
+	<!-- 父子容器外边距合并：如果父容器没有内边距跟边框，那么子容器边界会跟父容器边界，最终父容器的margin会去父容器与子容器margin的较大者 -->
+	<div style="border: 0 none; margin:0px; background-color:black">
+		<div style="background-color:yellow; width:100px; height:100px; margin:auto; margin-top:50px"></div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js验证form表单</title>
+	<script>
+		//验证是否填写
+		function validate_required(field,alerttxt){
+			with(field){
+				// alert(alerttxt) && false ： alert 返回是undefined && false 返回的还是undefined。而只有返回false才能终止默认动作。
+				return value ? true : (alert(alerttxt) && false);
+			}
+		}
+
+		//验证填写格式： 必须包含 @ . 其中@之后至少有一个 . @也不可以是邮件首字符
+		function validate_email(field,alerttxt){
+			with(field){
+				apos=value.indexOf("@");
+				dotpos=value.lastIndexOf(".");
+				if(apos < 1 || dotpos - apos < 2){
+					alert(alerttxt);
+					return false;
+				}
+				return true;
+			}
+		}
+		
+		function validate_form(thisform){
+			//验证是否填写，以及是否符合格式
+			with(thisform){
+				if( !validate_required(email,"email must be filled out!") || !validate_email(email,"Not a valid e-mail address!") ){
+					email.focus(); 
+					return false;
+				}
+				return true;
+			}
+		}
+	</script>
+</head>
+<body>
+	<form action="noPage.html" onsubmit="return validate_form(this)" method="post">
+		Email: <input type="text" name="email" size="30">
+		<input type="submit" value="提交">
+	</form>
+</body>
+</html>

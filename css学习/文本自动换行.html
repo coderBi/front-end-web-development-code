@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>文本自动换行处理</title>
+	<style>
+		div {
+			border: 1px solid red;
+			background-color: blue;
+			width: 100px;
+			height: 100px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<!-- 浏览器默认换行，不进行单词的打断 -->
+	<div style="word-break: normal">
+		i am a boy, and she is a girl.
+	</div>
+
+	<!-- break-all 意味着可以从单词内部打断进行换行 -->
+	<div style="word-break: break-all">
+		i am a boy, and she is a girl.
+	</div>
+	
+	<!-- 让所有单词不进行换行，只有遇到半角空格或者
+	连接字符处换行 -->
+	<div style="word-break: keep-all">
+		note:i am a boy, and she is a girl.
+	</div>
+</body>
+</html>

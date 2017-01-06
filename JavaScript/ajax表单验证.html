@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax表单验证</title>
+</head>
+<body>
+	<form action="" method="get">
+		用户名：<input type="text" id='username'  onblur='checkName()'><br>
+		密码：<input type="password" id='password' onblur='checkPassword()'>
+	</form>
+
+	<script>
+		function checkName(){
+			//获取页面username对象
+			var name=document.getElementById('username').value;
+			//对获取的username进行特殊编码
+			name = encodeURIComponent(name);
+			//使用ajax进行验证
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if(xhr.readyState == 4){
+					console.log(xhr.responseText);
+				}
+			}
+			xhr.open('get','http://localhost/getpostRequest.php?name=' + name,false);
+			xhr.send(null);
+		}
+
+		function checkPassword(){
+			//获取password并进行编码
+			var password = encodeURIComponent(document.getElementById("password").value);
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4){
+					alert(xhr.responseText);
+				}
+			}
+			xhr.open('post','http://localhost/getpostRequest.php',false);
+			xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+			xhr.send("password=" + password);
+		}
+	</script>
+</body>
+</html>

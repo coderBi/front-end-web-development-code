@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试float挤压内容</title>
+	<style>
+		.parent {
+			display: table;
+		}
+		.child1 {
+			height: 300px;
+			width: 300px;
+			background: teal;
+			float: left;
+			margin-right: 20px;
+		}
+		.child2 {
+			margin-left: 310px;
+			background-color: green;
+			font-style: 14px;
+			height: 20px;
+			/*设置overflow: hidden 被挤出去的内容被隐藏*/
+			overflow: hidden;
+		}
+	</style>
+	
+</head>
+<body>
+	<!-- 通过测试可以发现，float不会改变假定没有被挤压之前的其他容器的排版，
+	但是会挤压他遇到的内容，甚至会将内容挤出其所在的容器 -->
+	<!-- 同时可以发现，float虽然不会加压横向的排版，但是如果纵向的高度是没有设定的，例如这里child2的高度如果没有限制，在纵向是会改变其高度的 -->
+	<div class="parent">
+		<div class="child1"></div>
+		<div class="child2">
+			child文本家里舒服打扫房间卡拉斯卡飞机拉升房价
+		</div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test7测试a标签内部textalign效果</title>
+	<style>
+		.parent {
+			width: 300px;
+			height: 300px;
+			background: teal;
+			text-align: center;
+		}
+		.a-test {
+			width: 300px;
+			/*要想让上面的宽度设置生效 必须将a 改设置为 block或者inline-block*/
+			display: block;
+			display: inline-block;
+			text-align: center;
+		}
+		.span-test {
+			width: 300px;
+			/*同样内联标签默认随着内容填充，不接受text-align: center*/
+			text-align: center;
+			/*但是span a 这样的行内标签可以通过margin 调节左右边距*/
+			margin-left: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="parent">
+		div 文字
+	</div>
+	<div style="height:500px; background:green">
+		<a href="" class="a-test">a 文字</a>
+		<!-- 由于第一个a没有占满一行，尽管他是block级别的 其他的还是会遵循标准流 -->
+		<a href="" class="a-test">a 文字</a>
+		<!-- 可以发现第一个br是位于上面这个快级a的右边的， 因为a 没有占满一行 -->
+		<br>
+		<br>
+		<span class="span-test">span 文字</span>
+	</div>
+</body>
+</html>

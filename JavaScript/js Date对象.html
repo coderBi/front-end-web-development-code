@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js Date对象</title>
+</head>
+<body onload="startTime()">
+	<div id="txt"></div>
+	<div id="txt1"></div>
+	<div id="txt2"></div>
+	<script>
+		function startTime(){
+			var today=new Date();
+			var h=today.getHours();
+			var m=checkTime( today.getMinutes() );
+			var s=checkTime( today.getSeconds() );
+			document.getElementById("txt").innerHTML=h+':'+m+":"+s;
+			//setTime执行一次，但是这样写在了函数体自己里面就得到了setInterval的效果
+			setTimeout("startTime()",500); //500毫秒执行一次
+		}
+
+		//如果分钟或者秒是小于10的就在十位添加0
+		function checkTime(i){
+			return i < 10 ? "0" + i : i;
+		}
+
+		//显示当前时间
+		document.getElementById("txt1").innerHTML= Date();
+
+		// setFullYear  getTime toUTCString
+		var date=new Date();
+		date.setFullYear(2000,0,1); // 2000年1月1日
+		document.getElementById("txt2").innerHTML=date.getTime();
+		document.getElementById("txt2").innerHTML=date.toUTCString();
+	</script>
+</body>
+</html>

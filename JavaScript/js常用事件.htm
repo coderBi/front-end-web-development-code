@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js 常用事件</title>
+</head>
+<body>
+	<div onmouseover="mOver(this)" onmouseout="mOut(this)" onmousedown="mDown(this)" onmouseup="mUp(this)" style="background-color:green; color:#fff; width:120px;">把鼠标移到上面</div>
+	<script>
+		function mOver(obj){
+			obj.innerHTML="谢谢";
+		}
+		function mOut(obj){
+			//因为添加了mouseover，如果不添加mouseout事件会导致变不回来
+			obj.innerHTML="把鼠标移到上面";
+		}
+		function mDown(obj){
+			obj.innerHTML="按下了鼠标";
+		}
+		function mUp(obj){
+			obj.innerHTML="释放了鼠标";
+		}
+	</script>
+</body>
+</html>

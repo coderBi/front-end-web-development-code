@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 文档操作</title>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		function f1(){
+			//新建节点追加
+			$('#shu').append('<li>赵云</li>');  //后置追加
+			$('#shu').prepend('<li>马超</li>');  //前置追加
+			//已有节点追加，会发生节点的转移情况
+			$('#shu').append($('#wu li:eq(1)'));
+		}
+		function f2(){
+			$('<li>黄忠</li>').appendTo($('#shu')); //新节点后置被动追加
+		}
+		function f3(){
+			$('#liang').after('<li>黄月英</li>');
+		}
+		function f4(){
+			$('<li>魏延</li>').insertAfter($('#liang'));
+		}
+		function f5(){
+			$('<li>新人1</li>').replaceAll($('#liang'));
+		}
+		function f6(){
+			$('#quan').replaceWith($('<li>新人2</li>'));
+		}
+		function f7(){
+			$('#wu').empty();
+		}
+		function f8(){
+			$('#liang').remove();
+		}
+		$(document).ready(function(){
+			$('#shu li').mouseover(function(){
+				$(this).css('background-color','pink');
+			});
+			$('#shu li').mouseout(function(){
+				$(this).css('background-color','');
+			});
+			$('#copytrue').click(function(){
+				var node = $('#liang').clone(true);
+				$('#shu').append(node);
+			});
+			$('#copyfalse').click(function(){
+				var node = $('#liang').clone(false);
+				$('#shu').append(node);
+			});
+		});
+	</script>
+</head>
+<body>
+	<h2>jquery 操作文档</h2>
+	<ul id='shu'>
+		<li>刘备</li>
+		<li>张飞</li>
+		<li>关羽</li>
+		<li id='liang'>诸葛亮</li>
+	</ul>
+	<ul id='wu'>
+		<li id='quan'>孙权</li>
+		<li>孙尚香</li>
+		<li>吕蒙</li>
+		<li>周瑜</li>
+	</ul>
+	<input type="button" value='父子主动追加' onclick='f1()'>
+	<input type="button" value='父子被动追加' onclick='f2()'>
+	<input type="button" value='兄弟主动追加' onclick='f3()'>
+	<input type="button" value='兄弟被动追加' onclick='f4()'>
+	<br>
+	<input type="button" value='新节点替换' onclick='f5()'>
+	<input type="button" value='已有几点替换' onclick='f6()'>
+	<input type="button" value='清空子节点' onclick='f7()'>
+	<input type="button" value='删除指定的子节点' onclick='f8()'>
+	<br>
+	<input type="button" value='复制节点，参数为true' id='copytrue'>
+	<input type="button" value='复制节点，参数为false' id='copyfalse'>
+</body>
+</html>

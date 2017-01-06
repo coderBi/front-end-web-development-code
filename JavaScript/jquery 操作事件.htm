@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 操作事件</title>
+	<style>
+		div{width: 300px;height: 200px;background-color: lightblue}
+	</style>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+	$(function(){
+		$('div').mouseover(function(){
+			$('div').css('background-color','green');
+		});
+		$('div').mouseout(function(){
+			$(this).css('background-color','');  //第二个参数可以选择设置lightblue，因为css设置的都是行内样式，所以设置为空效果一样。
+		});
+
+		//可以为一个类型设置多个函数
+		$('div').mouseover(function(){
+			alert('mouseover');
+		});
+	});
+	///主动触发事件执行
+	function f1(){
+		$('div').mouseover();
+	}
+	</script>
+</head>
+<body>
+	<h2>jquery 事件操作</h2>
+	<div>Today is a good day!!</div>
+	<input type="button" value='触发' onclick='f1()'>
+</body>
+</html>

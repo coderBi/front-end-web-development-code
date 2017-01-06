@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css精灵</title></head>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.parent, .parent1 {
+			background: silver  no-repeat;
+			width: 150px;
+			height: 258px;
+		}
+		.child, .child1 {
+			background: url(../image/css精灵.png) no-repeat;
+			/*往左上移动 坐标是负数*/
+			background-position: -90px -5px;
+			width: 40px;
+			height: 35px;
+		}
+		.parent1 {
+			display: table;
+
+		}
+		.child1, .child2 {
+			float: left;
+			height: 40px;
+		}
+		.child2 {
+			line-height: 40px;
+		}
+	</style>
+<body>
+	<div class="parent">
+		<div class="child"></div>
+	</div>
+	
+	<!-- 让图片子容器与文字子容器都进行浮动，调整到同样的高度，实现两个子容器的对其 -->
+	<div class="parent1">
+		<div class="child1"></div>
+		<span class="child2">span文本</span>
+	</div>
+	
+</body>
+</html>

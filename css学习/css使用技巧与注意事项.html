@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css实现技巧与注意事项</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.parent	{
+			height: 100px;
+			width: 300px;
+			border: 1px solid teal;
+			background-color: yellowgreen;
+		}
+		.child {
+			background-color:  red;
+			height: 30px;
+			width: 30px;
+			margin-left: auto;
+			margin-right: 0;
+			margin-top: 35px;
+		}
+
+		.icon	{
+			background: url(../image/icon1.png) no-repeat;
+			width: 54px;
+			height: 56px;
+			/*i元素变为行内块*/
+			display: inline-block;
+			/*使用vertical-align=middle对齐*/
+			/*vertical-align 指的是在垂直方向这个容器用哪一个点去与相邻的元素对齐，这里如果设置了vertical-align: middle那么下面就不用再去设置字的高度了*/
+			vertical-align: middle;
+			/*顶部对齐*/
+			/*vertical-align: top;*/
+		}
+		.wrap span {
+			/*line-height: 56px;*/
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 注意事项1：尽量不要脱标（准流） -->
+	<!-- 注意事项2：
+	嵌套规则：a）行内元素不能放块级元素，例如span>div
+			  b)有些块级标签不能放块级标签，例如h1~h6 p 
+			  	hr dt（也有标题性质）等
+		  	  c）a标签不能再嵌套a和input标签。但是可以嵌套
+		  	  	行内块元素 -->
+	<!-- 例如要实现子盒子到父盒子的最右边，可以让其margin-right为0
+	左边让其自动 -->
+	<div class="parent">
+		<div class="child"></div>
+	</div>
+
+	<!-- 利用vertical-align(对其方式) 和 inline-block实现一个盒子跟文字的对其 -->
+	<!-- i标签在h5中含义更广了 -->
+	<div class="wrap">
+		<i class="icon"></i><span>span文本</span>
+	</div>
+
+	<!-- 常用logo优化：
+	1，利用text-indent:-2000em
+	2,利用padding挤开盒子并用overflow切割
+	3，利用margin挤开盒子并用overflow切割 -->
+	<div>
+		<!-- padding 与 overflow结合： 这里视频讲解其实有问题，
+		其实是由于父容器的内容区放不下子容器而出现了溢出。
+		要知道padding是在内容区外面的，而子容器在内容区里面，
+		不存在利用padding挤压子容器的 -->
+		<div style="width:300px; height:300px; padding-top:100px; padding-left:100px; background-color:teal; overflow:hidden">
+			<div style="width:400px; height:400px; background-color:red"></div>
+		</div>
+		<br>
+		
+		<!-- margin为负数移出父容器 然后利用overflow进行剪裁 -->
+		<div style="width:300px; height:300px;background-color:teal; overflow:hidden">
+			<div style="width:300px; height:300px; background-color:red; margin-top: -200px"></div>
+		</div>
+	</div>
+	
+</body>
+</html>

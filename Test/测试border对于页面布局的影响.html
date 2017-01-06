@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试border对布局的影响</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0px;
+		}
+		.frame {
+			width: 900px;
+			display: table;
+			margin: 0 auto;
+		}
+		.main {
+			float: left;
+			
+			margin-right: 10px;
+			width: 678px;
+			height: 500px;
+			background-color: teal;
+		}
+		.aside {
+			display: table;
+			margin-left: 685px;
+			font-size: 0;
+			background: teal;
+			border: 1px solid #000;
+		}
+		.aside-most-liked {
+			display: inline-block;
+			border: 3px solid red;
+			margin-bottom: 0px;
+			margin-left: 0px;
+			margin-right: 0px;
+			font-size: 0px;
+		}
+		.aside-most-liked-link {
+			font-size: 0;
+		}	
+	</style>
+</head>
+<body>
+	<div class="frame">
+		<div class="main"></div>
+		<div class="aside">
+			<div class="aside-most-liked">
+				<div>
+					<a href="#" class="aside-most-liked-link">
+						<img src="aside-most-liked-image.gif" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="aside-most-liked">
+		<div>
+			<a href="#" class="aside-most-liked-link">
+				<img src="aside-most-liked-image.gif" alt="">
+			</a>
+		</div>
+	</div>
+</body>
+</html>

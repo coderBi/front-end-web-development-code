@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>css滑动门</title>
+		<link rel="shortcut icon" href="../image/icon1.png">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			ul {
+				list-style: none;
+			}
+			.nav-item, .nav-link {
+				float: left;
+				/*margin-right: 5px;*/
+				color: #fff;
+			}
+			.nav-item {
+				margin-right: 5px;
+			}
+			.nav-link {
+				height: 35px;
+				text-decoration: none;
+				/*背景水平平铺*/
+				background: url(../image/中间.png) repeat-x;
+				line-height: 35px;
+			}
+			.border-left {
+				background: url(../image/左边.png) no-repeat;
+				float: left;
+				height: 35px;
+				width: 5px;
+			}
+			.border-right {
+				background: url(../image/右边.png) no-repeat;
+				float: left;
+				height: 35px;
+				width: 35px;
+			}
+			.nav-link1 {
+				background: url(../image/右边1.png) no-repeat center right;
+				float: left;
+				height: 35px;
+				line-height: 35px;
+				color: #fff;
+				text-decoration: none;
+				padding-right: 35px;
+			}
+			.clearfix {
+				overflow:hidden;
+			}
+			.clearfix:before, .clearfix:after {
+				height: 0px;
+				visibility: hidden;
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 每张图设计为三个部分 -->
+		<ul class="nav clearfix">
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link" href="#">a标签文本</a><i class="border-right"></i></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link" href="#">a标签文本</a><i class="border-right"></i></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link" href="#">a标签文本</a><i class="border-right"></i></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link" href="#">a标签文本</a><i class="border-right"></i></li>
+		</ul>
+		<br>
+		
+		<!-- 每张图设计两个部分 -->
+		<!-- 这种方法比上面一种要容易，但是这样之后文字的长度不能够超过第二张图片的长度 -->
+		<ul class="nav">
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link1" href="#">a标签文本</a></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link1" href="#">a标签文本文本</a></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link1" href="#">a标签文本文本</a></li>
+			<li class="nav-item"><i class="border-left"></i><a class="nav-link1" href="#">a标签文本</a></li>
+		</ul>
+		
+	</body>
+</html>

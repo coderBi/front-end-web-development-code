@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery 事件绑定</title>
+	<style>
+		div {background-color: lightgreen; width: 300px;height: 300px;}
+	</style>
+	<script src='./jquery-1.12.3.min.js'></script>
+	<script>
+		$(function(){
+			$('div').bind('mouseover',function(){
+				$(this).css('background-color','lightblue');
+			});
+			$('div').bind('mouseout',function(){
+				$(this).css('background-color','');
+			});
+			//对多个类型，绑定一个执行函数
+			$('div').bind('mouseout mouseover',f2);
+
+			$('div span').click(function(){
+				$(this).css('background-color','pink');
+				//禁止事件的冒泡
+			});
+			$('div span').mouseout(function(){
+				$(this).css('background-color','');
+			});
+
+			//div的click事件，会在点击下面的span的时候触发了span的click之后执行，这是事件的冒泡
+			$('div').click(function(){
+				$(this).css('background-color','silver');
+			});
+		});
+		function f2(){
+				alert('xx');
+		}
+		function f1(){
+			$('div').unbind('mouseout mouseover',f2);
+		}
+	</script>
+</head>
+<body>
+	<h2>事件绑定</h2>
+	<div>Today is a good day<span>!!!!</span></div>
+	<input type="button" value='取消绑定' onclick='f1()'>
+</body>
+</html>

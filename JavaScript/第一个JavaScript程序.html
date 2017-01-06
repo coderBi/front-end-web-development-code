@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第一个JavaScript程序</title>
+	<style type="text/css"></style>
+	<script type="text/javascript">
+		//弹出一个窗口
+		alert("first javascript application");
+		//向浏览器的控制台打印一条语句
+		console.log("控制台日志");
+		//弹出一个输入框
+		var content=prompt("请输入信息");
+		//判断数据类型
+		console.log(typeof "abc");
+		//输出用户输入的内容
+		alert(content);
+		//定义变量
+		var a=123;
+		var b="123";
+		var c=a;
+		//运算 123+123+"123"=246123  "123"+123+123=123123123
+		c=a+b;
+		console.log(a*b);  //*是数字运算，b当做数字
+		//isNaN判断是是否是非数字
+		console.log(isNaN("abc"));
+		//math对象的运用
+		console.log(Math.pow(2,10));  //也可是是Math.pow(4,1/2)
+		console.log(Math.random());
+		//未定义的变量与字符串拼接，输入undefinedabc
+		var xx;
+		alert(xx+"abc");
+		//类型转换
+		//转换成number
+		xx =1+Number(content);
+		xx=parseInt(content);
+		xx=parseFloat(content);
+		//转换成字符串
+		xx=xx.toString(xx);
+		xx=String(xx);
+		//使用confirm
+		console.log(window.confirm("确认"));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
