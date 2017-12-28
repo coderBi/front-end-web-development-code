@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>题目1：使用DW创建新页面</title>
+	<meta name='keywords' content='DW 创建表格 样式 CSS'>
+	<meta name='author' content='大舒'>
+	<meta name='description' content='使用DW创建一个表格，设计到表格的拆分，a文字样式等CSS练习'>
+	<style>
+		table{
+			border-collapse:collapse;
+		}
+		td{
+			border: 1px solid #000;
+		}
+		#rightTop{
+			text-decoration:none;
+		}
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td rowspan='2'><a href="http://www.etju.com"><img src="./image/left.jpg" alt="左边带超链接图片"></a></td>
+			<td><a id='rightTop' href="">这是一段指向空链接的文字,文字链接的下划线已经使用内联CSS样式进行清除</a></td>
+		</tr>
+		<tr>
+			<td><hr></td>
+		</tr>
+	</table>
+</body>
+</html>
